@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\RedirectsUsers;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -53,10 +54,10 @@ class LoginController extends Controller
 //         dd($user);
         if($user){
             $PassIn = $request->password;
-
-            $hashedPassIn = hash('sha256', $PassIn, false);
+//            $hashedPassIn = hash('sha256', $PassIn, false);
+            $hashedPassIn = bcrypt($PassIn);
             $password = $user->password;
-            dd(Hash);
+            dd(Hash::check('plain-text',$PassIn));
             if($hashedPassIn == $password){
                  dd($user);
                 Auth::loginUsingId($user->id, true);
