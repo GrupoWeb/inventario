@@ -54,12 +54,9 @@ class LoginController extends Controller
 //         dd($user);
         if($user){
             $PassIn = $request->password;
-//            $hashedPassIn = hash('sha256', $PassIn, false);
-            $hashedPassIn = bcrypt($PassIn);
+            $hashedPassIn = hash('sha256', $PassIn, false);
             $password = $user->password;
-            dd(Hash::check('plain-text',$PassIn));
             if($hashedPassIn == $password){
-                 dd($user);
                 Auth::loginUsingId($user->id, true);
                 header( "refresh:0.1;url=/home" );
             }else{
