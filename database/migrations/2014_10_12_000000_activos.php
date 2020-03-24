@@ -18,29 +18,28 @@ class Activos extends Migration
             $table->integer('no_folio');
             $table->integer('no_libro');
             $table->string('documento_ingreso');
-            $table->string('documento_salida');
-            $table->string('usuario');
+            $table->string('numero_movimiento');
             $table->string('inventario_fisico');
             $table->integer('renglon');
-            $table->integer('id_donante');
             $table->integer('cantidad_producto');
-            $table->timestamp('fecha_fiscal');
+            $table->string('fecha_fiscal');
             $table->string('registro_factura');
             $table->integer('id_producto');
             $table->string('comentario');
-            $table->float('valor_costo');
-            $table->timestamp('fecha_ingreso');
+            $table->float('valor_costo',8,2);
+            $table->date('fecha_ingreso');
             $table->string('codigo_sicoin');
-            $table->string('lugar_fisico');
+            $table->integer('id_lugar_fisico');
             $table->integer('id_empleado');
             $table->integer('id_categoria');
             $table->integer('id_estado_producto');
             $table->integer('id_dependencia');
             $table->integer('id_cuenta');
-            $table->integer('no_factura');
-            $table->integer('id_cuenta');
+            $table->string('no_factura');
             $table->integer('id_proveedor');
-            $table->timestamps();           
+            $table->float('alza',8,2);
+            $table->float('baja',8,2);
+            $table->timestamps();
         });
     }
 
