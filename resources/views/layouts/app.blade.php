@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/all.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,15 +20,17 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/all.css') }}">
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
     @include('common.header')
-    <div class="app-body">
+    <div class="app-body"  >
+        
         <div class="sidebar">
             @include('common.sidebar')
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
-        <main class="py-4 main">
+        <main class="py-4 main" id="app">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">@yield('breadcrumb')</li>
             </ol>
@@ -37,5 +40,6 @@
             @yield('content')
         </main>
     </div>
+    {{--  <script src="{{ asset('js/app.js')}}"></script>  --}}
 </body>
 </html>

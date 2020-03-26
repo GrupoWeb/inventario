@@ -34,7 +34,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -58,7 +58,7 @@ class LoginController extends Controller
             $password = $user->password;
             if($hashedPassIn == $password){
                 Auth::loginUsingId($user->id, true);
-                header( "refresh:0.1;url=/home" );
+                header( "refresh:0.1;url=/" );
             }else{
                 return $this->sendFailedLoginResponse($request);
             }

@@ -16,6 +16,7 @@ class Productos extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id_producto');
             $table->string('descripcion');
+            $table->string('estatus');
             $table->timestamps();        
         });
     }

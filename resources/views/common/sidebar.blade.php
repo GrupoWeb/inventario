@@ -1,13 +1,14 @@
 <nav class="sidebar-nav">
     <ul class="nav">
-        <li class="nav-title">Components</li>
+        {{-- <li class="nav-title"></li> --}}
         <li class="nav-item nav-dropdown">
+            
             <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-puzzle"></i> Base</a>
+                <i class="nav-icon fas fa-book-open"></i> Catálogo</a>
             <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" href="base/breadcrumb.html">
-                        <i class="nav-icon icon-puzzle"></i> Breadcrumb</a>
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="product">
+                        <i class="nav-icon fas fa-user-plus"></i> Producto</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="base/cards.html">
