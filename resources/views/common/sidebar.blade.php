@@ -2,7 +2,6 @@
     <ul class="nav">
         {{-- <li class="nav-title"></li> --}}
         <li class="nav-item nav-dropdown">
-            
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-book-open"></i> Catálogo</a>
             <ul class="nav-dropdown-items">
@@ -62,6 +61,21 @@
                     <a class="nav-link" href="base/tooltips.html">
                         <i class="nav-icon icon-puzzle"></i> Tooltips</a>
                 </li>
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon fas fa-address-book"></i> Activos</a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="active">
+                        <i class="nav-icon fas fa-edit"></i> Ingreso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="base/cards.html">
+                        <i class="nav-icon icon-puzzle"></i> Código de Barras</a>
+                </li>
+                
             </ul>
         </li>
     </ul>

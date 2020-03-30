@@ -15,6 +15,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
  * Router Cors
  */
 
+ /******Product Data****************** */
  Route::get('product','inventario@showProduct');
  Route::post('addProduct','catalogo@addProduct');
  Route::get('allProduct','catalogo@allProduct');
@@ -22,3 +23,8 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
  Route::post('deleteProductById','catalogo@deleteProductById');
 
  /****************************** */
+
+ /** Form Active */
+
+ Route::get('active','inventario@showActive');
+ /***************** */
