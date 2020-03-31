@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\product;
+use Carbon\Carbon;
 
 class catalogo extends Controller
 {
@@ -12,7 +13,7 @@ class catalogo extends Controller
           $data->descripcion = $request->nameP;
           $data->estatus = 'A';
           $data->save();
-          
+
           return response()->json($data,200);
     }
 
@@ -29,5 +30,12 @@ class catalogo extends Controller
     public function deleteProductById(Request $request){
           $data = product::where('id_producto', $request->id)->update(['estatus' => 'I']);
           return response()->json($data, 200);
+    }
+
+
+    public function getYear(){
+        $date = Carbon::now('America/Guatemala');
+//        return $date->isoFormat('YYYY');
+        return response()->json($date->isoFormat('YYYY'),200);
     }
 }

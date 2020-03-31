@@ -5,3 +5,16 @@
 .sidebar{
     background: #162947 !important;
 }
+
+.title_custom{
+    line-height: 40px;
+    position: relative;
+    font-size: 16px;
+    width:70%;
+    text-align: center;
+}
+
+.font_custom_input input{
+    font-size: 1.5em;
+    text-align:center !important;
+}
