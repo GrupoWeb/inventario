@@ -11,6 +11,7 @@ Route::get('/','inventario@index')->name('index');
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getYear','catalogo@getYear');
+Route::get('sequence','catalogo@sequences_data');
 
 /**
  * Router Cors

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\product;
+use App\Model\sequences;
 use Carbon\Carbon;
 
 class catalogo extends Controller
@@ -37,5 +38,29 @@ class catalogo extends Controller
         $date = Carbon::now('America/Guatemala');
 //        return $date->isoFormat('YYYY');
         return response()->json($date->isoFormat('YYYY'),200);
+    }
+
+    public function sequences_data($tabla){
+        // verificar si es tabla vacia
+        if($data = sequences::select('value')->count() === 0){
+            $value = 0;
+            $vacio = true;
+        }else{
+            $value = sequences::select('value')->where('name','=', $tabla)->get();
+            $vacio = false;
+        };
+
+        if($vacio === true){
+            $data = new sequences;
+            $data->name = $tabla;
+            $data->value = $value + 1;
+            $data->save();
+        }else{
+            $data = new sequences;
+            $data->name = $tabla;
+            $data->value = $value[0]['value']+1;
+            $data->save();
+        }
+        return response()->json($data,200);
     }
 }
