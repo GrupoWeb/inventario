@@ -18,4 +18,8 @@ class inventario extends Controller
     public function showProduct(){
         return view('product.index');
     }
+
+    public function showActive(){
+        return view('active.index');
+    }
 }
