@@ -600,14 +600,30 @@
                 dialogo: false,
                 id_seleccion: 0,
                 descripcion_seleccion: "",
+                dataSatProvider: []
 
             };
         },
         mounted() {
             this.getAll();
             this.getYear();
+            this.getProviderSat();
         },
         methods: {
+            getProviderSat(){
+                let urlSat="http://gestorquejas.diaco.gob.gt/file-web-quejaini/rs/proveedores/busca?nit=&nombre=";
+                axios.get(urlSat).then(response => {
+                    this.dataSatProvider = response.data;
+                    console.log(response.data);
+                })
+            },
+
+
+
+
+
+
+
             getSaldo() {
                 this.form.saldo = 'Q. ' + (this.form.alza - this.form.baja);
             },
