@@ -257,16 +257,18 @@
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
                             <el-form-item label="Proveedor:" prop="proveedor">
-                                <el-select class="select_width" v-model="form.proveedor" clearable filterable placeholder="Seleccionar">
-                                    <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
-                                    </el-option>
-                                </el-select>
+                                <el-input class="font_custom_input" v-model="form.proveedor" @change="searchProvider"></el-input>
                             </el-form-item>
+                        </el-col>
+                    </el-row>
+<!--                    datos del proveedor -->
+                    <el-row :gutter="10" v-show="visible">
+                        <el-col :span="24">
+                            <el-table :data="dataSatProvider" style="width: 100%">
+                                <el-table-column label="Nit" prop="nit"></el-table-column>
+                                <el-table-column label="Nombre" prop="name"></el-table-column>
+                                <el-table-column label="Razon Social" prop="business_name"></el-table-column>
+                            </el-table>
                         </el-col>
                     </el-row>
 <!--                    alza, baja, saldo, sicoin y codigo de barra-->
@@ -600,22 +602,36 @@
                 dialogo: false,
                 id_seleccion: 0,
                 descripcion_seleccion: "",
-                dataSatProvider: []
+                dataSatProvider: [],
+                nit:"",
+                visible: true
 
             };
         },
         mounted() {
             this.getAll();
             this.getYear();
-            this.getProviderSat();
+
         },
         methods: {
             getProviderSat(){
-                let urlSat="http://gestorquejas.diaco.gob.gt/file-web-quejaini/rs/proveedores/busca?nit=&nombre=";
-                axios.get(urlSat).then(response => {
-                    this.dataSatProvider = response.data;
-                    console.log(response.data);
+                const config = { headers: {'Content-Type': 'application/json'} };
+                let urlSat="http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/?nit="+this.nit;
+                axios.get(urlSat,config).then(response => {
+                    this.dataSatProvider = [];
+                   this.dataSatProvider.push({
+                       nit: response.data.value.nitProveedor,
+                       name: response.data.value.nombre,
+                       business_name: response.data.value.nombreEmpresa
+                   });
                 })
+            },
+            searchProvider (){
+
+              this.visible = true;
+              this.nit = this.form.proveedor;
+
+              this.getProviderSat();
             },
 
 
