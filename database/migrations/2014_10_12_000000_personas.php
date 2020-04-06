@@ -14,7 +14,7 @@ class Personas extends Migration
     public function up()
     {
         Schema::create('personas', function (Blueprint $table) {
-            $table->bigIncrements('id_persona');
+            $table->integer('id_persona')->primary()->unsigned();
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cargo');

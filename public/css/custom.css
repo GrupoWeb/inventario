@@ -30,3 +30,7 @@
 .select_width{
     width:100% !important;
 }
+
+.BarCode{
+    width: 50%;
+}

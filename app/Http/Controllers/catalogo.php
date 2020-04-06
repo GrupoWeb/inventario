@@ -7,6 +7,7 @@ use App\Model\product;
 use App\Model\sequences;
 use Carbon\Carbon;
 
+
 class catalogo extends Controller
 {
     public function addProduct(Request $request){
@@ -63,4 +64,6 @@ class catalogo extends Controller
         }
         return response()->json($data,200);
     }
+
+    
 }

@@ -12,6 +12,7 @@ Route::get('/','inventario@index')->name('index');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getYear','catalogo@getYear');
 Route::get('sequence','catalogo@sequences_data');
+Route::post('barCode','BarCode@barcodeGet');
 
 /**
  * Router Cors

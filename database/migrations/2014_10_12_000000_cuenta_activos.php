@@ -14,7 +14,7 @@ class CuentaActivos extends Migration
     public function up()
     {
         Schema::create('cuenta_activos', function (Blueprint $table) {
-            $table->bigIncrements('id_cuenta');
+            $table->integer('id_cuenta')->primary()->unsigned();
             $table->string('numero_cuenta');
             $table->string('descripcion');
             $table->timestamps();      

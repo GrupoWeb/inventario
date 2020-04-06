@@ -14,7 +14,7 @@ class EstadosProductos extends Migration
     public function up()
     {
         Schema::create('estado_productos', function (Blueprint $table) {
-            $table->bigIncrements('id_estadoP');
+            $table->integer('id_estadoP')->primary()->unsigned();
             $table->string('descripcion');
             $table->timestamps();
         });

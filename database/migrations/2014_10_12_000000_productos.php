@@ -14,7 +14,7 @@ class Productos extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->bigIncrements('id_producto');
+            $table->integer('id_producto')->primary()->unsigned();
             $table->string('descripcion');
             $table->string('estatus');
             $table->timestamps();        
