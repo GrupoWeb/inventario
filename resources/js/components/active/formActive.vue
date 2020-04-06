@@ -267,7 +267,7 @@
                             <el-table :data="dataSatProvider" style="width: 100%">
                                 <el-table-column label="Nit" prop="nit"></el-table-column>
                                 <el-table-column label="Nombre" prop="name"></el-table-column>
-                                <el-table-column label="Razon Social" prop="business_name"></el-table-column>
+                                <el-table-column label="Dirección" prop="business_address"></el-table-column>
                             </el-table>
                         </el-col>
                     </el-row>
@@ -616,13 +616,13 @@
         methods: {
             getProviderSat(){
                 const config = { headers: {'Content-Type': 'application/json'} };
-                let urlSat="http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/?nit="+this.nit;
+                let urlSat="http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/empresa?nit="+this.nit;
                 axios.get(urlSat,config).then(response => {
                     this.dataSatProvider = [];
                    this.dataSatProvider.push({
                        nit: response.data.value.nitProveedor,
                        name: response.data.value.nombre,
-                       business_name: response.data.value.nombreEmpresa
+                       business_address: response.data.value.direccion
                    });
                 })
             },
