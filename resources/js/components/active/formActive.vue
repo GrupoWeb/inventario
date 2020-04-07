@@ -4,7 +4,7 @@
             <div class="card-header text-white bg-primary">
                 <el-row :gutter="10">
                     <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="20">
-                        Entidad: <span class="pl-3">Ministerio de Economía </span>
+                        Entidad: <span class="pl-3">{{ entity }} </span>
                     </el-col>
                     <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
                         Año Fiscal:
@@ -17,14 +17,14 @@
 <!--                    Unidad Administrativa -->
                     <el-row :gutter="10">
                         <el-col :span="24">
-                            <el-form-item label="Unidad Administrativa Inventario:">
-                               <el-select v-model="form.estadoP" class="select_width" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Unidad Administrativa Inventario:" prop="unidad">
+                               <el-select v-model="form.unidad" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -33,26 +33,26 @@
 <!--                    Grupo y Categoria -->
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
-                            <el-form-item label="Grupo:" prop="folio">
-                                <el-select class="select_width" v-model="form.estadoP" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Grupo:" prop="grupo">
+                                <el-select class="select_width" v-model="form.grupo" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                         >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
-                            <el-form-item label="Categoría:" prop="folio">
-                                <el-select class="select_width" v-model="form.estadoP" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Categoría:" prop="categoria">
+                                <el-select class="select_width" v-model="form.categoria" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                     >
                                     </el-option>
                                 </el-select>
@@ -62,26 +62,26 @@
 <!--                    seccion y tipo -->
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
-                            <el-form-item label="Seccion:" prop="folio">
-                                <el-select class="select_width" v-model="form.estadoP" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Seccion:" prop="seccion">
+                                <el-select class="select_width" v-model="form.seccion" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                     >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
-                            <el-form-item label="Tipo:" prop="folio">
-                                <el-select class="select_width" v-model="form.estadoP" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Tipo:" prop="tipo">
+                                <el-select class="select_width" v-model="form.tipo" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                     >
                                     </el-option>
                                 </el-select>
@@ -91,26 +91,26 @@
                     <!--                    Bien  -->
                     <el-row :gutter="10">
                         <el-col :span="12">
-                            <el-form-item label="Bien:">
-                                <el-select v-model="form.estadoP" class="select_width" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Bien:" prop="bien">
+                                <el-select v-model="form.bien" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                         clearable>
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
-                            <el-form-item label="Estado del Bien:">
-                                <el-select v-model="form.estadoP" class="select_width" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Estado del Bien:" prop=estado>
+                                <el-select v-model="form.estado" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
                                         clearable>
                                     </el-option>
                                 </el-select>
@@ -125,7 +125,7 @@
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="9">
-                            <el-form-item label="Comentario:" prop="comentario">
+                            <el-form-item label="Comentario:">
                                 <el-input type="textarea" :rows="5" v-model="form.comentario"></el-input>
                             </el-form-item>
                         </el-col>
@@ -157,10 +157,11 @@
                             <el-form-item label="Localizado en:" prop="localidad">
                                 <el-select v-model="form.localidad" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -172,11 +173,11 @@
                             <el-form-item label="Empleado:" prop="empleado">
                                 <el-select class="select_width" v-model="form.empleado" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -186,11 +187,11 @@
                             <el-form-item label="Dependencia:" prop="dependencia">
                                 <el-select class="select_width" v-model="form.dependencia" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -199,11 +200,11 @@
                             <el-form-item label="Cuenta:" prop="cuenta_nueva">
                                 <el-select class="select_width" v-model="form.cuenta_nueva" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -212,27 +213,27 @@
                     <!--          respaldo y secuencia  -->
                     <el-row :gutter="10">
                         <el-col :span="12">
-                            <el-form-item label="Tipo documento respaldo:">
-                                <el-select v-model="form.estadoP" class="select_width" clearable filterable placeholder="Seleccionar">
+                            <el-form-item label="Tipo documento respaldo:" prop="respaldo">
+                                <el-select v-model="form.respaldo" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label="Secuencia:">
-                                <el-select v-model="form.estadoP" class="select_width" clearable filterable placeholder="Seleccionar">
+                                <el-select v-model="form.secuencia" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                        clearable>
+                                        v-for="item in unidades"
+                                        :key="item.id_unidad"
+                                        :label="item.id_unidad + ' '+ item.name"
+                                        :value="item.name"
+                                        >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -241,18 +242,18 @@
 <!--                    Factura, costo, serie y proveedor -->
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
-                        <el-form-item label="Número Factura" prop="nFactura">
-                            <el-input class="font_custom_input" v-model="form.nFactura"></el-input>
-                        </el-form-item>
-                    </el-col>
+                            <el-form-item label="Número Factura" prop="nFactura">
+                                <el-input class="font_custom_input" v-model="form.nFactura"></el-input>
+                            </el-form-item>
+                        </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
                             <el-form-item label="Costo:" prop="costo">
                                 <el-input class="font_custom_input" v-model="form.costo"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
-                            <el-form-item label="Serie:" prop="estadoP">
-                                <el-input class="font_custom_input" v-model="form.costo"></el-input>
+                            <el-form-item label="Serie:" prop="serie">
+                                <el-input class="font_custom_input" v-model="form.serie"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
@@ -284,7 +285,7 @@
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
-                            <el-form-item label="Saldo:" prop="baja">
+                            <el-form-item label="Saldo:" >
                                 <el-input class="font_custom_input" v-model="form.saldo" disabled></el-input>
                             </el-form-item>
                         </el-col>
@@ -407,33 +408,33 @@
                 pagesize: 10,
                 nowYear: "",
                 form: {
-                    folio: "",
-                    libro: "",
-                    docEntrada: "",
-                    docSalida: "",
-                    renglon: "",
-                    iFisico: "",
-                    noMovimiento: "",
-                    cantidad: "",
+                    unidad: "",
+                    grupo: "",
+                    seccion: "",
+                    tipo: "",
+                    bien: "",
+                    estado: "",
                     producto: "",
                     comentario: "",
                     modelo: "",
                     serie: "",
                     marca: "",
-                    fIngreso: "",
                     localidad: "",
-                    empleado: "",
-                    categoria: "",
+                    proveedor: "",
                     dependencia: "",
                     cuenta_nueva: "",
+                    respaldo: "",
+                    secuencia:"",
                     nFactura: "",
-                    proveedor: "",
-                    sicoin: "",
                     costo: "",
-                    estadoP: "",
+                    serie:"",
                     alza: "",
                     baja: "",
-                    saldo: ""
+                    saldo: "",
+                    sicoin: "",
+                    empleado: "",
+                    fIngreso: "",
+                    categoria: "",
 
                 },
                 formEdit: {
@@ -441,59 +442,45 @@
                 },
                 listProduct: [],
                 rules: {
-                    folio: [
+                    unidad: [
                         {
                             required: true,
-                            message: "El campo folio no puede estar vacio",
+                            message: "Seleccione unidad",
                             trigger: "blur"
                         }
                     ],
-                    libro: [
+                    grupo: [
                         {
                             required: true,
-                            message: "El campo libro no puede estar vacio",
+                            message: "Seleccione Grupo",
                             trigger: "blur"
                         }
                     ],
-                    docEntrada: [
+                    seccion: [
                         {
                             required: true,
-                            message: "El campo Documento Entrada no puede estar vacio",
+                            message: "Selecciones Seccion",
                             trigger: "blur"
                         }
                     ],
-                    costo: [
+                    tipo: [
                         {
                             required: true,
-                            message: "El campo Costo no puede estar vacio",
+                            message: "Seleccione Tipo",
                             trigger: "blur"
                         }
                     ],
-                    renglon: [
+                    bien: [
                         {
                             required: true,
-                            message: "El campo Renglón no puede estar vacio",
+                            message: "Seleccione Bien",
                             trigger: "blur"
                         }
                     ],
-                    iFisico: [
+                    estado: [
                         {
                             required: true,
-                            message: "El campo Inventario Fisico no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
-                    noMovimiento: [
-                        {
-                            required: true,
-                            message: "El campo Movimiento no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
-                    cantidad: [
-                        {
-                            required: true,
-                            message: "El campo Cantidad no puede estar vacio",
+                            message: "Seleccione Estado",
                             trigger: "blur"
                         }
                     ],
@@ -501,20 +488,6 @@
                         {
                             required: true,
                             message: "El campo Producto no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
-                    comentario: [
-                        {
-                            required: true,
-                            message: "El campo Comentario no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
-                    fIngreso: [
-                        {
-                            required: true,
-                            message: "El campo Fecha no puede estar vacio",
                             trigger: "blur"
                         }
                     ],
@@ -532,13 +505,6 @@
                             trigger: "blur"
                         }
                     ],
-                    categoria: [
-                        {
-                            required: true,
-                            message: "El campo Categoría no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
                     dependencia: [
                         {
                             required: true,
@@ -553,10 +519,54 @@
                             trigger: "blur"
                         }
                     ],
+                    respaldo: [
+                        {
+                            required: true,
+                            message: "El campo respaldo no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                    secuencia: [
+                        {
+                            required: true,
+                            message: "El campo Secuencia no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
                     nFactura: [
                         {
                             required: true,
                             message: "El campo Número Factura no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                    costo: [
+                        {
+                            required: true,
+                            message: "El campo Costo Factura no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                    serie: [
+                        {
+                            required: true,
+                            message: "El campo serie Factura no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                   
+
+                    fIngreso: [
+                        {
+                            required: true,
+                            message: "El campo Fecha no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                    categoria: [
+                        {
+                            required: true,
+                            message: "El campo Categoría no puede estar vacio",
                             trigger: "blur"
                         }
                     ],
@@ -574,13 +584,7 @@
                             trigger: "blur"
                         }
                     ],
-                    estadoP: [
-                        {
-                            required: true,
-                            message: "El campo Estado no puede estar vacio",
-                            trigger: "blur"
-                        }
-                    ],
+                    
                     alza: [
                         {
                             required: true,
@@ -604,20 +608,29 @@
                 dataSatProvider: [],
                 nit:"",
                 visible: true,
-                codeBar: ""
+                codeBar: "",
+                urlData: {
+                    urlEntity: "entidades",
+                    urlSat: "http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/empresa?nit=",
+                    barCode: "barCode",
+                    unidades: "unidades",
+                },
+                entity: "",
+                unidades: []
 
             };
         },
         mounted() {
             this.getAll();
             this.getYear();
+            this.getEntity();
+            this.getUnidad();
 
         },
         methods: {
             getProviderSat(){
                 const config = { headers: {'Content-Type': 'application/json'} };
-                let urlSat="http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/empresa?nit="+this.nit;
-                axios.get(urlSat,config).then(response => {
+                axios.get(this.urlData.urlSat+this.nit,config).then(response => {
                     this.dataSatProvider = [];
                    this.dataSatProvider.push({
                        nit: response.data.value.nitProveedor,
@@ -627,19 +640,26 @@
                 })
             },
             searchProvider (){
-
               this.visible = true;
               this.nit = this.form.proveedor;
-
               this.getProviderSat();
             },
             getCodeBar(){
-                
-                let url = "barCode";
-                axios.post(url,{codeBar: this.form.sicoin}).then(response => {
+                axios.post(this.urlData.barCode,{codeBar: this.form.sicoin}).then(response => {
                     this.codeBar = response.data
-                    console.log(response.data);
                 })
+            },
+            getEntity() {
+                axios.get(this.urlData.urlEntity)
+                    .then(response => {
+                        this.entity = response.data[0].name;
+                    })
+            },
+            getUnidad() {
+                axios.get(this.urlData.unidades)
+                    .then(response => {
+                        this.unidades = response.data;
+                    })
             },
 
 

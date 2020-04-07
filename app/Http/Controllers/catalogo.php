@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Model\product;
 use App\Model\sequences;
 use Carbon\Carbon;
+use App\Model\entidad;
+use App\Model\unidaEjecutora;
 
 
 class catalogo extends Controller
@@ -47,7 +49,7 @@ class catalogo extends Controller
             $value = 0;
             $vacio = true;
         }else{
-            $value = sequences::select('value')->where('name','=', $tabla)->get();
+            $value = sequences::select('value')->where('name','=', $tabla)->get(); 
             $vacio = false;
         };
 
@@ -63,6 +65,16 @@ class catalogo extends Controller
             $data->save();
         }
         return response()->json($data,200);
+    }
+
+    public function getEntidad(){
+        $entidad = entidad::all();
+        return response()->json($entidad,200);
+    }
+
+    public function getUnidad(){
+        $entidad = unidaEjecutora::all();
+        return response()->json($entidad,200);
     }
 
     
