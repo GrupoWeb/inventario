@@ -22,7 +22,7 @@ class UnidadSeeder extends Seeder
         $unidad = new unidaEjecutora;
         $unidad->id_unidad = $id;
         $unidad->id_entidad = 1;
-        $unidad->name = "Ministerio de Economía";
+        $unidad->name = "Ministerio de Economía"; 
         $unidad->save();
     }
 }

@@ -22,7 +22,7 @@
                                     <el-option
                                         v-for="item in unidades"
                                         :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
+                                        :label="item.id_unidad + '-'+ item.name"
                                         :value="item.name"
                                         >
                                     </el-option>
@@ -34,12 +34,12 @@
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
                             <el-form-item label="Grupo:" prop="grupo">
-                                <el-select class="select_width" v-model="form.grupo" clearable filterable placeholder="Seleccionar">
+                                <el-select class="select_width" v-model="form.grupo" clearable filterable placeholder="Seleccionar" @change="getCategorias">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in grupos"
+                                        :key="item.id_grupo"
+                                        :label="item.id_grupo + '-'+ item.name"
+                                        :value="item.id_grupo"
                                         >
                                     </el-option>
                                 </el-select>
@@ -47,12 +47,12 @@
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
                             <el-form-item label="Categoría:" prop="categoria">
-                                <el-select class="select_width" v-model="form.categoria" clearable filterable placeholder="Seleccionar">
+                                <el-select class="select_width" v-model="form.categoria" clearable filterable placeholder="Seleccionar" @change="getSecciones">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in categorias"
+                                        :key="item.id_categoria"
+                                        :label="item.id_categoria + '-'+ item.name"
+                                        :value="item.id_categoria"
                                     >
                                     </el-option>
                                 </el-select>
@@ -63,12 +63,12 @@
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
                             <el-form-item label="Seccion:" prop="seccion">
-                                <el-select class="select_width" v-model="form.seccion" clearable filterable placeholder="Seleccionar">
+                                <el-select class="select_width" v-model="form.seccion" clearable filterable placeholder="Seleccionar" @change="getTipos">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in secciones"
+                                        :key="item.id_seccion"
+                                        :label="item.id_seccion + '-'+ item.name"
+                                        :value="item.id_seccion"
                                     >
                                     </el-option>
                                 </el-select>
@@ -76,12 +76,12 @@
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
                             <el-form-item label="Tipo:" prop="tipo">
-                                <el-select class="select_width" v-model="form.tipo" clearable filterable placeholder="Seleccionar">
+                                <el-select class="select_width" v-model="form.tipo" clearable filterable placeholder="Seleccionar"  @change="getBienes">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in tipos"
+                                        :key="item.id_tipo"
+                                        :label="item.id_tipo + '-'+ item.name"
+                                        :value="item.id_tipo"
                                     >
                                     </el-option>
                                 </el-select>
@@ -94,9 +94,9 @@
                             <el-form-item label="Bien:" prop="bien">
                                 <el-select v-model="form.bien" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
+                                        v-for="item in Bienes"
+                                        :key="item.id_bien"
+                                        :label="item.id_bien + '-'+ item.name"
                                         :value="item.name"
                                         clearable>
                                     </el-option>
@@ -107,9 +107,9 @@
                             <el-form-item label="Estado del Bien:" prop=estado>
                                 <el-select v-model="form.estado" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
+                                        v-for="item in EstadosProducto"
+                                        :key="item.id_estadoP"
+                                        :label="item.id_estadoP + '-'+ item.descripcion"
                                         :value="item.name"
                                         clearable>
                                     </el-option>
@@ -155,15 +155,7 @@
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
                             <el-form-item label="Localizado en:" prop="localidad">
-                                <el-select v-model="form.localidad" clearable filterable placeholder="Seleccionar">
-                                    <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
-                                        >
-                                    </el-option>
-                                </el-select>
+                                    <el-input class="font_custom_input" v-model="form.localidad"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -173,10 +165,10 @@
                             <el-form-item label="Empleado:" prop="empleado">
                                 <el-select class="select_width" v-model="form.empleado" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in PersonasData"
+                                        :key="item.id_persona"
+                                        :label="item.nombres + ' '+ item.apellidos"
+                                        :value="item.id_persona"
                                         >
                                     </el-option>
                                 </el-select>
@@ -187,10 +179,10 @@
                             <el-form-item label="Dependencia:" prop="dependencia">
                                 <el-select class="select_width" v-model="form.dependencia" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in dependencias"
+                                        :key="item.id_dependencia"
+                                        :label="item.descripcion"
+                                        :value="item.id_dependencia"
                                         >
                                     </el-option>
                                 </el-select>
@@ -614,9 +606,27 @@
                     urlSat: "http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/empresa?nit=",
                     barCode: "barCode",
                     unidades: "unidades",
+                    grupos: "grupos",
+                    categorias: "categorias",
+                    secciones: "secciones",
+                    tipos: "tipos",
+                    Bienes: "Bienes",
+                    EstadosProducto: "EstadosProducto",
+                    addProductoBien: 'addproductobien',
+                    getPersonas: 'PersonasEntidad',
+                    dependencias: "dependencias"
                 },
                 entity: "",
-                unidades: []
+                identity: "",
+                unidades: [],
+                grupos: [],
+                categorias: [],
+                secciones: [],
+                tipos: [],
+                Bienes: [],
+                EstadosProducto: [],
+                PersonasData: [],
+                dependencias: [],
 
             };
         },
@@ -625,6 +635,10 @@
             this.getYear();
             this.getEntity();
             this.getUnidad();
+            this.getGrupo();
+            this.getBienes();
+            this.getEstadosProductos();
+            this.getDependencias();
 
         },
         methods: {
@@ -653,12 +667,73 @@
                 axios.get(this.urlData.urlEntity)
                     .then(response => {
                         this.entity = response.data[0].name;
+                        this.identity = response.data[0].id_entidad;
+                        this.getPersonas(this.identity);
                     })
             },
             getUnidad() {
                 axios.get(this.urlData.unidades)
                     .then(response => {
                         this.unidades = response.data;
+                    })
+            },
+            getGrupo() {
+                axios.get(this.urlData.grupos)
+                    .then(response => {
+                        this.grupos = response.data;
+                    })
+            },
+            getCategorias() {
+                axios.post(this.urlData.categorias,{grupo: this.form.grupo})
+                    .then(response => {
+                        this.categorias = response.data;
+                    })
+            },
+            getSecciones() {
+                axios.post(this.urlData.secciones,{categoria: this.form.categoria})
+                    .then(response => {
+                        this.secciones = response.data;
+                    })
+            },
+            getTipos() {
+                axios.post(this.urlData.tipos,{seccion: this.form.seccion})
+                    .then(response => {
+                        this.tipos = response.data;
+                    })
+            },
+            getBienes() {
+                axios.post(this.urlData.Bienes,{bien: this.form.tipo})
+                    .then(response => {
+                        this.Bienes = response.data;
+                    })
+            },
+            getEstadosProductos() {
+                axios.get(this.urlData.EstadosProducto)
+                    .then(response => {
+                        this.EstadosProducto = response.data;
+                    })
+            },
+
+            // addProduct(){
+            //     axios.post(this.urlData.addProductoBien,{des_producto: this.form.producto})
+            //         .then(response => {
+
+            //         });
+            // },
+
+            getPersonas(entidad){
+                console.log(entidad);
+                axios.post(this.urlData.getPersonas,{entidad: entidad})
+                    .then(response => {
+                        this.PersonasData = response.data;
+                        console.log(response.data);
+                    })
+            },
+
+            getDependencias(){
+                axios.get(this.urlData.dependencias)
+                    .then(response => {
+                        this.dependencias = response.data;
                     })
             },
 

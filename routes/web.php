@@ -36,4 +36,13 @@ Route::post('barCode','BarCode@barcodeGet');
   /** Form Active */
   Route::get('entidades','catalogo@getEntidad');
   Route::get('unidades','catalogo@getUnidad');
+  Route::get('grupos','catalogo@getGrupo');
+  Route::post('categorias','catalogo@getCategoria');
+  Route::post('secciones','catalogo@getSeccion');
+  Route::post('tipos','catalogo@getTipo');
+  Route::post('Bienes','catalogo@getBien');
+  Route::get('EstadosProducto','catalogo@getEstadoProducto');
+  Route::post('PersonasEntidad','catalogo@getPersonas');
+  Route::post('addproductobien','catalogo@addProductBienes');
+  Route::get('dependencias','catalogo@getDependencias');
   /***************** */
