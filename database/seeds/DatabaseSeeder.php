@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(estadoBien::class);
         $this->call(dependencia::class);
         $this->call(PersonDataSeeder::class);
+        $this->call(cuentas::class);
+        $this->call(documento_respaldos::class);
+        $this->call(secuencia_fac::class);
     }
 }

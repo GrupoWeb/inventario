@@ -16,6 +16,10 @@ use App\Model\biene;
 use App\Model\estado;
 use App\Model\persona;
 use App\Model\dependencias;
+use App\Model\cuentas_activo;
+use App\Model\documentos_respaldo;
+use App\Model\secuencias_factura;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -135,11 +139,11 @@ class catalogo extends Controller
             $product->save();
 
             DB::commit();
-            return response()->json(true,200);
+            return response()->json($product,200);
         }
         catch(\Exceptio $e){
             DB::rollBack();
-            return response()->json(false,200);
+            return response()->json(false,500);
         }
 
     }
@@ -155,6 +159,20 @@ class catalogo extends Controller
         return response()->json($dep,200);
     }
 
+    public function getCuentasActivo(){
+        $cuenta = cuentas_activo::all();
+        return response()->json($cuenta,200);
+    }
+
+    public function getDocumentosRespaldo(){
+        $respaldo = documentos_respaldo::all();
+        return response()->json($respaldo,200);
+    }
+
+    public function getSecuenciasFactura(){
+        $secuenciasFac = secuencias_factura::all();
+        return response()->json($secuenciasFac,200);
+    }
 
 
     

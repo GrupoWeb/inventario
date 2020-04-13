@@ -23,7 +23,7 @@
                                         v-for="item in unidades"
                                         :key="item.id_unidad"
                                         :label="item.id_unidad + '-'+ item.name"
-                                        :value="item.name"
+                                        :value="item.id_unidad"
                                         >
                                     </el-option>
                                 </el-select>
@@ -97,7 +97,7 @@
                                         v-for="item in Bienes"
                                         :key="item.id_bien"
                                         :label="item.id_bien + '-'+ item.name"
-                                        :value="item.name"
+                                        :value="item.id_bien"
                                         clearable>
                                     </el-option>
                                 </el-select>
@@ -110,7 +110,7 @@
                                         v-for="item in EstadosProducto"
                                         :key="item.id_estadoP"
                                         :label="item.id_estadoP + '-'+ item.descripcion"
-                                        :value="item.name"
+                                        :value="item.id_estadoP"
                                         clearable>
                                     </el-option>
                                 </el-select>
@@ -120,7 +120,7 @@
 <!--                    Descripion y Comentario-->
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="15">
-                            <el-form-item label="Descripción del Producto:" prop="producto">
+                            <el-form-item label="Descripción del Producto:" prop="producto" >
                                 <el-input type="textarea" :rows="5" v-model="form.producto"></el-input>
                             </el-form-item>
                         </el-col>
@@ -149,7 +149,7 @@
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="5">
                             <el-form-item label="Fecha Ingreso:" prop="fIngreso">
-                                <el-date-picker v-model="form.fIngreso" type="date"
+                                <el-date-picker v-model="form.fIngreso" type="date" format="yyyy/MM/dd"
                                                 placeholder="Fecha"></el-date-picker>
                             </el-form-item>
                         </el-col>
@@ -192,10 +192,10 @@
                             <el-form-item label="Cuenta:" prop="cuenta_nueva">
                                 <el-select class="select_width" v-model="form.cuenta_nueva" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in cuentas"
+                                        :key="item.id_cuenta"
+                                        :label="item.id_cuenta + '-'+ item.descripcion"
+                                        :value="item.id_cuenta"
                                         >
                                     </el-option>
                                 </el-select>
@@ -208,10 +208,10 @@
                             <el-form-item label="Tipo documento respaldo:" prop="respaldo">
                                 <el-select v-model="form.respaldo" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in respaldos"
+                                        :key="item.id_documento_respaldo"
+                                        :label="item.id_documento_respaldo + '-'+ item.name"
+                                        :value="item.id_documento_respaldo"
                                         >
                                     </el-option>
                                 </el-select>
@@ -221,10 +221,10 @@
                             <el-form-item label="Secuencia:">
                                 <el-select v-model="form.secuencia" class="select_width" clearable filterable placeholder="Seleccionar">
                                     <el-option
-                                        v-for="item in unidades"
-                                        :key="item.id_unidad"
-                                        :label="item.id_unidad + ' '+ item.name"
-                                        :value="item.name"
+                                        v-for="item in secuenciasFac"
+                                        :key="item.id_secuencia"
+                                        :label="item.id_secuencia + '-'+ item.name"
+                                        :value="item.id_secuencia"
                                         >
                                     </el-option>
                                 </el-select>
@@ -244,8 +244,8 @@
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
-                            <el-form-item label="Serie:" prop="serie">
-                                <el-input class="font_custom_input" v-model="form.serie"></el-input>
+                            <el-form-item label="Serie Factura:" prop="serieFac">
+                                <el-input class="font_custom_input" v-model="form.serieFac"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="6">
@@ -378,23 +378,6 @@
     export default {
         data() {
             return {
-                options: [{
-                    value: 'Option1',
-                    label: 'Option1'
-                }, {
-                    value: 'Option2',
-                    label: 'Option2'
-                }, {
-                    value: 'Option3',
-                    label: 'Option3'
-                }, {
-                    value: 'Option4',
-                    label: 'Option4'
-                }, {
-                    value: 'Option5',
-                    label: 'Option5'
-                }],
-
                 total: 0,
                 currentPage: 1,
                 pagesize: 10,
@@ -427,6 +410,7 @@
                     empleado: "",
                     fIngreso: "",
                     categoria: "",
+                    serieFac: "",
 
                 },
                 formEdit: {
@@ -542,6 +526,13 @@
                     serie: [
                         {
                             required: true,
+                            message: "El campo serie no puede estar vacio",
+                            trigger: "blur"
+                        }
+                    ],
+                    serieFac: [
+                        {
+                            required: true,
                             message: "El campo serie Factura no puede estar vacio",
                             trigger: "blur"
                         }
@@ -599,7 +590,7 @@
                 descripcion_seleccion: "",
                 dataSatProvider: [],
                 nit:"",
-                visible: true,
+                visible: false,
                 codeBar: "",
                 urlData: {
                     urlEntity: "entidades",
@@ -614,7 +605,12 @@
                     EstadosProducto: "EstadosProducto",
                     addProductoBien: 'addproductobien',
                     getPersonas: 'PersonasEntidad',
-                    dependencias: "dependencias"
+                    dependencias: "dependencias",
+                    cuentas: "cuentas",
+                    respaldos: "respaldos",
+                    secuenciasFac: "secuenciasFac",
+                    addActives: "active"
+                    
                 },
                 entity: "",
                 identity: "",
@@ -627,6 +623,11 @@
                 EstadosProducto: [],
                 PersonasData: [],
                 dependencias: [],
+                cuentas: [],
+                respaldos: [],
+                secuenciasFac: [],
+                id_producto_new:"",
+                handleProducto:""
 
             };
         },
@@ -639,6 +640,9 @@
             this.getBienes();
             this.getEstadosProductos();
             this.getDependencias();
+            this.getCuentas();
+            this.getRespaldos();
+            this.getSecuenciasFac();
 
         },
         methods: {
@@ -713,20 +717,40 @@
                         this.EstadosProducto = response.data;
                     })
             },
+            getCuentas() {
+                axios.get(this.urlData.cuentas)
+                    .then(response => {
+                        this.cuentas = response.data;
+                    })
+            },
+            getRespaldos() {
+                axios.get(this.urlData.respaldos)
+                    .then(response => {
+                        this.respaldos = response.data;
+                    })
+            },
+            getSecuenciasFac() {
+                axios.get(this.urlData.secuenciasFac)
+                    .then(response => {
+                        this.secuenciasFac = response.data;
+                    })
+            },
 
-            // addProduct(){
-            //     axios.post(this.urlData.addProductoBien,{des_producto: this.form.producto})
-            //         .then(response => {
-
-            //         });
-            // },
+            addProduct(){
+                axios.post(this.urlData.addProductoBien,{des_producto: this.form.producto})
+                    .then(response => {
+                        this.id_producto_new = response.data.id_producto;
+                    });
+            },
 
             getPersonas(entidad){
-                console.log(entidad);
+                
                 axios.post(this.urlData.getPersonas,{entidad: entidad})
                     .then(response => {
                         this.PersonasData = response.data;
-                        console.log(response.data);
+                        const status = JSON.parse(response.status);
+                        this.handleProducto = status;
+                        
                     })
             },
 
@@ -737,12 +761,6 @@
                     })
             },
 
-
-
-
-
-
-
             getSaldo() {
                 this.form.saldo = 'Q. ' + (this.form.alza - this.form.baja);
             },
@@ -750,42 +768,112 @@
                 let url = "getYear";
                 axios.get(url).then(response => {
                     this.nowYear = response.data;
-                    console.log(this.nowYear);
+                    
                 })
             },
             onSubmit(form) {
                 const h = this.$createElement;
                 this.$refs[form].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        let url = "addProduct";
-                        axios
-                            .post(url, {
-                                nameP: this.form.name
-                            })
-                            .then(response => {
-                                const status = JSON.parse(response.status);
-                                if (status == "200") {
-                                    this.$message({
-                                        message: h("p", null, [
-                                            h("i", {style: "color: teal"}, "Producto Agregado!")
-                                        ]),
-                                        type: "success"
+                    
+                    
+                        if (valid) {
+                            // if(this.handleProducto == "200"){
+                                this.fullscreenLoading = true;
+                                axios
+                                    .post(this.urlData.addActives, {
+                                        nowYear: this.nowYear,
+                                        entity: this.identity,
+                                        unidad: this.form.unidad,
+                                        grupo: this.form.grupo,
+                                        categoria: this.form.categoria,
+                                        seccion: this.form.seccion,
+                                        tipo: this.form.tipo,
+                                        bien: this.form.bien,
+                                        estado: this.form.estado,
+                                        producto: this.form.producto,
+                                        comentario: this.form.comentario,
+                                        modelo: this.form.modelo,
+                                        serie: this.form.serie,
+                                        marca: this.form.marca,
+                                        fIngreso: this.form.fIngreso,
+                                        localidad: this.form.localidad,
+                                        empleado: this.form.empleado,
+                                        dependencia: this.form.dependencia,
+                                        cuenta: this.form.cuenta_nueva,
+                                        respaldo: this.form.respaldo,
+                                        secuencia: this.form.secuencia,
+                                        nFactura: this.form.nFactura,
+                                        costo: this.form.costo,
+                                        serieFac: this.form.serieFac,
+                                        proveedor: this.form.proveedor,
+                                        alza: this.form.alza,
+                                        baja: this.form.baja,
+                                        sicoin: this.form.sicoin,
+                                    })
+                                    .then(response => {
+                                        const status = JSON.parse(response.status);
+                                        if (status == "200") {
+                                            this.$message({
+                                                message: h("p", null, [
+                                                    h("i", {style: "color: teal"}, "Bien agregado con exito!")
+                                                ]),
+                                                type: "success"
+                                            });
+                                            this.fullscreenLoading = false;
+                                            this.clearForm();
+                                            
+                                        }
                                     });
-                                    this.fullscreenLoading = false;
-                                    this.form.name = "";
-                                    this.getAll();
-                                }
+                            // }
+                        } else {
+                            this.$message.error({
+                                message: h("p", null, [
+                                    h("i", {style: "color: red"}, "Ingrese un Nombre de Categoria")
+                                ])
                             });
-                    } else {
-                        this.$message.error({
-                            message: h("p", null, [
-                                h("i", {style: "color: red"}, "Ingrese un Nombre de Categoria")
-                            ])
-                        });
-                        return false;
-                    }
+                            return false;
+                        }
+                    
+                    
+
                 });
+            },
+
+            clearForm(){
+                    this.form.unidad = "";
+                    this.form.grupo = "";
+                    this.form.seccion = "";
+                    this.form.tipo = "";
+                    this.form.bien = "";
+                    this.form.estado =  "";
+                    this.form.producto = "";
+                    this.form.comentario = "";
+                    this.form.modelo = "";
+                    this.form.serie = "";
+                    this.form.marca = "";
+                    this.form.localidad = "";
+                    this.form.proveedor = "";
+                    this.form.dependencia = "";
+                    this.form.cuenta_nueva = "";
+                    this.form.respaldo = "";
+                    this.form.secuencia ="";
+                    this.form.nFactura = "";
+                    this.form.costo = "";
+                    this.form.serie = "";
+                    this.form.alza = "";
+                    this.form.baja = "";
+                    this.form.saldo = "";
+                    this.form.sicoin = "";
+                    this.form.empleado = "";
+                    this.form.fIngreso = "";
+                    this.form.categoria = "";
+                    this.form.serieFac = "";
+                    this.id_producto_new  = "";
+                    this.handleProducto = "";
+                    this.dataSatProvider = [];
+                    this.visible = false;
+
+                    
             },
             getAll() {
                 let url = "allProduct";

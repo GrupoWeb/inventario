@@ -31,6 +31,7 @@ Route::post('barCode','BarCode@barcodeGet');
  /** Form Active */
 
  Route::get('active','inventario@showActive');
+ Route::post('active','inventario@addActivosBienes');
  /***************** */
 
   /** Form Active */
@@ -45,4 +46,7 @@ Route::post('barCode','BarCode@barcodeGet');
   Route::post('PersonasEntidad','catalogo@getPersonas');
   Route::post('addproductobien','catalogo@addProductBienes');
   Route::get('dependencias','catalogo@getDependencias');
+  Route::get('cuentas','catalogo@getCuentasActivo');
+  Route::get('respaldos','catalogo@getDocumentosRespaldo');
+  Route::get('secuenciasFac','catalogo@getSecuenciasFactura');
   /***************** */

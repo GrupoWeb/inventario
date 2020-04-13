@@ -30,7 +30,7 @@ class Activos extends Migration
             $table->string('serie');
             $table->string('marca');
             $table->date('fecha_ingreso');
-            $table->integer('id_lugar_fisico');
+            $table->string('lugar_fisico');
             $table->integer('id_empleado')->unsigned();// ya
             $table->integer('id_dependencia')->unsigned(); // ya
             $table->integer('id_cuenta')->unsigned();// ya
