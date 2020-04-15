@@ -22,4 +22,16 @@ class BarCode extends Controller
             "activos" => $activos
         ]);
     }
+
+    public function BarCodePrinter(){
+        $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin')
+                    ->join('productos','productos.id_producto','=','activos.id_producto')->get();
+        
+                    $pdf = \PDF::loadView('active.PrinterBarcode',[
+                        "activos" => $activos
+                    ]);
+                    $pdf->setPaper('Legal', 'portrait');
+                    return $pdf->stream("Códigos de Barra".'.pdf'); 
+    }
+
 }

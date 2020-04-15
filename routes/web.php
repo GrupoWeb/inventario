@@ -50,5 +50,9 @@ Route::get('barCode','BarCode@BarCodeAll');
   Route::get('cuentas','catalogo@getCuentasActivo');
   Route::get('respaldos','catalogo@getDocumentosRespaldo');
   Route::get('secuenciasFac','catalogo@getSecuenciasFactura');
-  
   /***************** */
+
+  /** Printer BarCode */
+
+  Route::get('printer','BarCode@BarCodePrinter');
+  /******************** */

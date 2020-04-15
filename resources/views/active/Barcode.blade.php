@@ -4,6 +4,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                   <div class="table-responsive-sm" id="codigos">
+                        <a href="./printer" class="btn btn-primary  mt-3 mb-3" target="_blank">
+                              <i class="fas fa-print"></i> 
+                        </a>
                         <table class="table table-bordered">
                               <thead>
                                     <tr class="thead-dark">
@@ -28,5 +31,5 @@
     </div>
 @endsection
 @section('breadcrumb')
-    Activos Todos
+    Códigos de Barra
 @endsection

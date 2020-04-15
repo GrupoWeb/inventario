@@ -83,7 +83,7 @@ class inventario extends Controller
     }
 
     public function addActivosBienes(Request $request){
-        // try {
+        try {
             DB::beginTransaction();
 
             $secuencia = $this->sequences_data("activos");
@@ -131,9 +131,9 @@ class inventario extends Controller
             DB::commit();
 
             return response()->json($activos_bien,200);
-        // } catch (\Throwable $th) {
-        //     // DB::rollBack();
-        //     return response()->json($th,500);
-        // }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
     }
 }
