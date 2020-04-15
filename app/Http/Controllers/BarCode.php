@@ -30,7 +30,8 @@ class BarCode extends Controller
                     $pdf = \PDF::loadView('active.PrinterBarcode',[
                         "activos" => $activos
                     ]);
-                    $pdf->setPaper('Legal', 'portrait');
+                    // $pdf->setPaper('Legal', 'landscape');
+                    $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
                     return $pdf->stream("Códigos de Barra".'.pdf'); 
     }
 

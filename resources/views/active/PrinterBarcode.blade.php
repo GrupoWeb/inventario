@@ -6,33 +6,72 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Invetario</title>
       <style>
-            .table {
-                  font-family: verdana !important;
-                  font-size: 11px;
+            
+            .container {
                   width: 100%;
-                  border-spacing: 0;
-                  border-collapse: collapse;
-                  border: none;
-                  /* border-top: none !important;
-                  margin-bottom: none !important; */
+                  padding-right: 15px;
+                  padding-left: 15px;
+                  margin-right: auto;
+                  margin-left: auto;
             }
-            /* .handler_producto {
-            width: 70%;
-            text-align: center;
+            .handler_producto {
+                  width: 70%;
+                  text-align: center;
             }
 
             .handler_Barcode{
-            width: 30%;
-            text-align: center;
-            } */
+                  width: 30%;
+                  text-align: center;
+            }
 
             .handler_for_product{
-            font-size: 1rem;
-            text-align: justify;
+                  font-size: 16px;
+                  text-align: justify;
             }
 
             .handler_for_Barcode > div{
-            margin:auto;
+                  margin:auto;
+            }
+
+            .table-bordered {
+                  border: 1px solid #dee2e6;
+            }
+
+            .table-bordered th,
+            .table-bordered td {
+                  border: 1px solid #dee2e6 !important;
+            }
+
+            
+            .table-bordered thead th,
+            .table-bordered thead td {
+                  border-bottom-width: 2px;
+            }
+
+            table {
+                  border-collapse: collapse;
+            }
+
+            .table {
+                  width: 100%;
+                  margin-bottom: 1rem;
+                  color: #212529;
+            }
+
+            .table th,
+            .table td {
+                  padding: 0.75rem;
+                  vertical-align: top;
+                  border-top: 1px solid #dee2e6;
+            }
+
+            .table thead th {
+                  vertical-align: bottom;
+                  border-bottom: 2px solid #dee2e6;
+            }
+
+            .table tbody + tbody {
+                  border-top: 2px solid #dee2e6;
             }
 
       </style>
