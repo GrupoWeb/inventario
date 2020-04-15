@@ -3,10 +3,10 @@
         <div class="card">
             <div class="card-header text-white bg-primary">
                 <el-row :gutter="10">
-                    <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="20">
+                    <el-col :xs="25" :sm="6" :md="8" :lg="20" :xl="20">
                         Entidad: <span class="pl-3">{{ entity }} </span>
                     </el-col>
-                    <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
+                    <el-col :xs="25" :sm="6" :md="8" :lg="4" :xl="4">
                         Año Fiscal:
                         <span class="pl-3">{{ nowYear }}</span>
                     </el-col>
@@ -32,7 +32,7 @@
                     </el-row>
 <!--                    Grupo y Categoria -->
                     <el-row :gutter="10">
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="12">
                             <el-form-item label="Grupo:" prop="grupo">
                                 <el-select class="select_width" v-model="form.grupo" clearable filterable placeholder="Seleccionar" @change="getCategorias">
                                     <el-option
@@ -45,7 +45,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="12">
                             <el-form-item label="Categoría:" prop="categoria">
                                 <el-select class="select_width" v-model="form.categoria" clearable filterable placeholder="Seleccionar" @change="getSecciones">
                                     <el-option
@@ -61,7 +61,7 @@
                     </el-row>
 <!--                    seccion y tipo -->
                     <el-row :gutter="10">
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="12">
                             <el-form-item label="Seccion:" prop="seccion">
                                 <el-select class="select_width" v-model="form.seccion" clearable filterable placeholder="Seleccionar" @change="getTipos">
                                     <el-option
@@ -74,7 +74,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="12">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="12">
                             <el-form-item label="Tipo:" prop="tipo">
                                 <el-select class="select_width" v-model="form.tipo" clearable filterable placeholder="Seleccionar"  @change="getBienes">
                                     <el-option
@@ -119,12 +119,12 @@
                     </el-row>
 <!--                    Descripion y Comentario-->
                     <el-row :gutter="10">
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="15">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="15">
                             <el-form-item label="Descripción del Producto:" prop="producto" >
                                 <el-input type="textarea" :rows="5" v-model="form.producto"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="9">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="9">
                             <el-form-item label="Comentario:">
                                 <el-input type="textarea" :rows="5" v-model="form.comentario"></el-input>
                             </el-form-item>
@@ -132,28 +132,28 @@
                     </el-row>
 <!--                    Modelo, serie, marca, fecha y localizado-->
                     <el-row :gutter="10">
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="5">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="5" :xl="5">
                             <el-form-item label="Modelo:">
                                 <el-input class="font_custom_input" v-model="form.modelo"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="5">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="5" :xl="5">
                             <el-form-item label="Serie:">
                                 <el-input class="font_custom_input" v-model="form.serie"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="5">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="5" :xl="5">
                             <el-form-item label="Marca:">
                                 <el-input class="font_custom_input" v-model="form.marca"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="5">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="5" :xl="5">
                             <el-form-item label="Fecha Ingreso:" prop="fIngreso">
                                 <el-date-picker v-model="form.fIngreso" type="date" format="yyyy/MM/dd"
                                                 placeholder="Fecha"></el-date-picker>
                             </el-form-item>
                         </el-col>
-                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="4" :xl="4">
                             <el-form-item label="Localizado en:" prop="localidad">
                                     <el-input class="font_custom_input" v-model="form.localidad"></el-input>
                             </el-form-item>
@@ -199,6 +199,11 @@
                                         >
                                     </el-option>
                                 </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="8">
+                            <el-form-item label="Cantidad:" prop="cantidad">
+                                    <el-input class="font_custom_input" v-model="form.cantidad"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -411,6 +416,7 @@
                     fIngreso: "",
                     categoria: "",
                     serieFac: "",
+                    cantidad:"",
 
                 },
                 formEdit: {
@@ -422,6 +428,13 @@
                         {
                             required: true,
                             message: "Seleccione unidad",
+                            trigger: "blur"
+                        }
+                    ],
+                    cantidad: [
+                        {
+                            required: true,
+                            message: "El campo cantidad no tiene que estar vacio",
                             trigger: "blur"
                         }
                     ],
@@ -809,6 +822,7 @@
                                         alza: this.form.alza,
                                         baja: this.form.baja,
                                         sicoin: this.form.sicoin,
+                                        cantidad: this.form.cantidad 
                                     })
                                     .then(response => {
                                         const status = JSON.parse(response.status);
@@ -872,6 +886,7 @@
                     this.handleProducto = "";
                     this.dataSatProvider = [];
                     this.visible = false;
+                    this.codeBar = "";
 
                     
             },

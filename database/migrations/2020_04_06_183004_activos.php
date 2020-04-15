@@ -25,10 +25,10 @@ class Activos extends Migration
             $table->integer('id_bien')->unsigned(); // ya
             $table->integer('id_estado')->unsigned();// ya
             $table->integer('id_producto')->unsigned();// ya
-            $table->string('comentario');
-            $table->string('modelo');
-            $table->string('serie');
-            $table->string('marca');
+            $table->string('comentario')->nullable();
+            $table->string('modelo')->nullable();
+            $table->string('serie')->nullable();
+            $table->string('marca')->nullable();
             $table->date('fecha_ingreso');
             $table->string('lugar_fisico');
             $table->integer('id_empleado')->unsigned();// ya
@@ -39,10 +39,11 @@ class Activos extends Migration
             $table->string('no_factura');
             $table->float('valor_costo',8,2);
             $table->string('serie_factura');
-            $table->integer('nit_proveedor');
+            $table->string('nit_proveedor');
             $table->float('alza',8,2);
             $table->float('baja',8,2);
             $table->string('codigo_sicoin');
+            $table->integer('cantidad');
             $table->timestamps();
             
             $table->foreign('id_entidad')->references('id_entidad')->on('entidads');

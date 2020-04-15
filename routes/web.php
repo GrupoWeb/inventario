@@ -13,6 +13,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getYear','catalogo@getYear');
 Route::get('sequence/{table}','catalogo@sequences_data');
 Route::post('barCode','BarCode@barcodeGet');
+Route::get('barCode','BarCode@BarCodeAll');
 
 
 /**
@@ -49,4 +50,5 @@ Route::post('barCode','BarCode@barcodeGet');
   Route::get('cuentas','catalogo@getCuentasActivo');
   Route::get('respaldos','catalogo@getDocumentosRespaldo');
   Route::get('secuenciasFac','catalogo@getSecuenciasFactura');
+  
   /***************** */

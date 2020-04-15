@@ -125,6 +125,7 @@ class inventario extends Controller
             $activos_bien->alza = $request->alza;
             $activos_bien->baja = $request->baja;
             $activos_bien->codigo_sicoin = $request->sicoin;
+            $activos_bien->cantidad = $request->cantidad;
             $activos_bien->save();
 
             DB::commit();

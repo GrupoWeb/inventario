@@ -34,3 +34,22 @@
 .BarCode{
     width: 50%;
 }
+
+.handler_producto {
+    width: 70%;
+    text-align: center;
+}
+
+.handler_Barcode{
+    width: 30%;
+    text-align: center;
+}
+
+.handler_for_product{
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.handler_for_Barcode > div{
+    margin:auto;
+}
