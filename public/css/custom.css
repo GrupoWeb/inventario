@@ -5,3 +5,51 @@
 .sidebar{
     background: #162947 !important;
 }
+
+.title_custom{
+    line-height: 40px;
+    position: relative;
+    font-size: 16px;
+    width:70%;
+    text-align: center;
+}
+
+.YearFiscal{
+    line-height: 40px;
+    position: relative;
+    font-size: 16px;
+    width:10%;
+    text-align: center;
+}
+
+.font_custom_input input{
+    font-size: 1.5em;
+    text-align:center !important;
+}
+
+.select_width{
+    width:100% !important;
+}
+
+.BarCode{
+    width: 50%;
+}
+
+.handler_producto {
+    width: 70%;
+    text-align: center;
+}
+
+.handler_Barcode{
+    width: 30%;
+    text-align: center;
+}
+
+.handler_for_product{
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.handler_for_Barcode > div{
+    margin:auto;
+}

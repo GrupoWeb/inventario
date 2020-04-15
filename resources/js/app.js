@@ -33,6 +33,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('sidebar-component', require('./components/sidebar/sidebar.vue').default);
 Vue.component('product-component', require('./components/product/formProduct.vue').default);
+Vue.component('active-component', require('./components/active/formActive.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

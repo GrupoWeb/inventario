@@ -14,16 +14,20 @@ class Personas extends Migration
     public function up()
     {
         Schema::create('personas', function (Blueprint $table) {
-            $table->bigIncrements('id_persona');
+            $table->integer('id_persona')->primary()->unsigned();
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cargo');
-            $table->integer('id_dependencia');
+            $table->integer('id_dependencia')->unsigned();
+            $table->integer('id_entidad')->unsigned();
             $table->string('nit');
             $table->integer('nivel');
             $table->integer('extension');
             $table->string('activo');
             $table->timestamps();       
+
+            $table->foreign('id_entidad')->references('id_entidad')->on('entidads');
+            $table->foreign('id_dependencia')->references('id_dependencia')->on('dependencias');
         });
     }
 

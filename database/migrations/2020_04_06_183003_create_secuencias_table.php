@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoriaActivos extends Migration
+class CreateSecuenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CategoriaActivos extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_activos', function (Blueprint $table) {
-            $table->bigIncrements('id_categoria');
-            $table->string('descripcion');
-            $table->string('activo');
-            $table->timestamps();      
+        Schema::create('secuencias', function (Blueprint $table) {
+            $table->integer('id_secuencia')->primary()->unsigned();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CategoriaActivos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria_activos');
+        Schema::dropIfExists('secuencias');
     }
 }
