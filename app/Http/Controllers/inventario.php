@@ -28,6 +28,10 @@ class inventario extends Controller
         return view('active.index');
     }
 
+    public function showSearch(){
+        return view('Scanner.scanner');
+    }
+
     public function sequences_data($tabla){
         
         if($data = sequences::where('name','=',$tabla)->select('value')->count() === 0){

@@ -13,14 +13,14 @@ class grupos extends Seeder
      */
     public function run()
     {
-        $data = new sequences;
-        $data->name = "grupos";
-        $data->value = 1;
-        $data->save();
-        $id = $data->value;
+        // $data = new sequences;
+        // $data->name = "grupos";
+        // $data->value = 1;
+        // $data->save();
+        // $id = $data->value;
 
         $unidad = new grupo;
-        $unidad->id_grupo = $id;
+        $unidad->id_grupo = 3;
         $unidad->name = "PROPIEDAD PLANTA Y EQUIPO";
         $unidad->save();
     }

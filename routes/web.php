@@ -55,4 +55,12 @@ Route::get('barCode','BarCode@BarCodeAll');
   /** Printer BarCode */
 
   Route::get('printer','BarCode@BarCodePrinter');
+  Route::get('search','inventario@showSearch');
   /******************** */
+
+
+
+  /****Inventario Inicial */
+
+  Route::get('Inicial','InventarioInicial@SetCategory');
+  /********************* */
