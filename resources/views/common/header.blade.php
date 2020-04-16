@@ -13,7 +13,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">
-                <span>{{ auth()->user()->name!=null ? auth()->user()->name : "Administrator" }}</span>
+                <!-- <span>{{ auth()->user()->username!=null ? auth()->user()->username : "Administrator" }}</span> -->
                 <img class="img-avatar" src="img/avatars/avatar_user.png">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
