@@ -22,7 +22,7 @@ class bienes extends Seeder
         $unidad = new biene;
         $unidad->id_bien = $id;
         $unidad->id_tipo = 1;
-        $unidad->name = "SILLA TIPO SECRETARIA CON RODOS";
+        $unidad->name = "INVENTARIO INICIAL";
         $unidad->save();
     }
 }

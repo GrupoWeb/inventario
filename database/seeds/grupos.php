@@ -21,7 +21,7 @@ class grupos extends Seeder
 
         $unidad = new grupo;
         $unidad->id_grupo = 3;
-        $unidad->name = "PROPIEDAD PLANTA Y EQUIPO";
+        $unidad->name = "Inventario Inicial";
         $unidad->save();
     }
 }

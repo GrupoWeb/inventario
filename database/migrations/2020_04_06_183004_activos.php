@@ -29,7 +29,7 @@ class Activos extends Migration
             $table->string('modelo')->nullable();
             $table->string('serie')->nullable();
             $table->string('marca')->nullable();
-            $table->date('fecha_ingreso');
+            $table->string('fecha_ingreso');
             $table->string('lugar_fisico');
             $table->integer('id_empleado')->unsigned();// ya
             $table->integer('id_dependencia')->unsigned(); // ya
@@ -37,11 +37,11 @@ class Activos extends Migration
             $table->integer('id_documento_respaldo')->unsigned();// ya
             $table->integer('id_secuencia')->unsigned();// ya
             $table->string('no_factura');
-            $table->float('valor_costo',8,2);
+            $table->string('valor_costo');
             $table->string('serie_factura');
             $table->string('nit_proveedor');
-            $table->float('alza',8,2);
-            $table->float('baja',8,2);
+            $table->string('alza');
+            $table->string('baja');
             $table->string('codigo_sicoin');
             $table->integer('cantidad');
             $table->timestamps();
