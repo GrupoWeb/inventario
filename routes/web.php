@@ -16,6 +16,7 @@ Route::post('barCode','BarCode@barcodeGet');
 Route::get('barCode','BarCode@BarCodeAll');
 
 
+
 /**
  * Router Cors
  */
@@ -55,7 +56,8 @@ Route::get('barCode','BarCode@BarCodeAll');
   /** Printer BarCode */
 
   Route::get('printer','BarCode@BarCodePrinter');
-  Route::get('search','inventario@showSearch');
+  Route::get('search','inventario@showSearch'); 
+  Route::get('printCode/{code}','BarCode@GetBarCodeById');
   /******************** */
 
 

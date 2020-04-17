@@ -10,17 +10,25 @@
                         <table class="table table-bordered">
                               <thead>
                                     <tr class="thead-dark">
+                                          <th class="handler_fecha">Fecha</th>
+                                          <th class="handler_bien">No. bien</th>
                                           <th class="handler_producto">Producto</th>
-                                          <th class="handler_Barcode">Código de Barra</th>
+                                          <th class="handler_sistema">Sistema</th>
+                                          <th class="handler_fisico">Fisico</th>
+                                          <th class="handler_diferencia">Diferencia</th>
                                     </tr>
                               </thead>
                               <tbody>
                                     @foreach( $activos as $productos)
                                           <tr>
+                                                <td class="handler_for_product">{{ $productos->fecha_ingreso }}</td>
+                                                <td class="handler_for_product">{{ $productos->codigo_sicoin }}</td>
                                                 <td class="handler_for_product">{{ $productos->descripcion }}</td>
                                                 <td class="handler_for_Barcode">
-                                                      {!! DNS1D::getBarcodeHTML($productos->codigo_sicoin,"C128",2,80,'black',true) !!}
+                                                      {{ $productos->cantidad }}
                                                 </td>
+                                                <td class="handler_for_product"></td>
+                                                <td class="handler_for_product"></td>
                                           </tr>
                                     @endforeach
                                     </tbody>
