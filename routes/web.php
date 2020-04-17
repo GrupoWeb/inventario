@@ -58,6 +58,7 @@ Route::get('barCode','BarCode@BarCodeAll');
   Route::get('printer','BarCode@BarCodePrinter');
   Route::get('search','inventario@showSearch'); 
   Route::get('printCode/{code}','BarCode@GetBarCodeById');
+  Route::get('List','inventario@showList');
   /******************** */
 
 

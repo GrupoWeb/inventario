@@ -17,10 +17,12 @@ class BarCode extends Controller
     public function BarCodeAll(){
         $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
                     ->join('productos','productos.id_producto','=','activos.id_producto')->get();
+
+        return $activos;
         
-        return view('active.Barcode',[
-            "activos" => $activos
-        ]);
+        // return view('active.Barcode',[
+        //     "activos" => $activos
+        // ]);
     }
 
     public function BarCodePrinter(){

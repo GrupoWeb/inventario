@@ -32,6 +32,10 @@ class inventario extends Controller
         return view('Scanner.scanner');
     }
 
+    public function showList(){
+        return view('active.Barcode');
+    }
+
     public function sequences_data($tabla){
         
         if($data = sequences::where('name','=',$tabla)->select('value')->count() === 0){

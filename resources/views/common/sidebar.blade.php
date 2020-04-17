@@ -20,7 +20,7 @@
                         <i class="nav-icon fas fa-edit"></i> Ingreso</a>
                 </li>
                 <li class="nav-item ml-3">
-                    <a class="nav-link" href="./barCode">
+                    <a class="nav-link" href="./List">
                         <i class="nav-icon fas fa-barcode"></i> Código de Barras</a>
                 </li>
                 <li class="nav-item ml-3">
