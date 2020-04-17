@@ -40,16 +40,21 @@
     text-align: center;
 }
 
+.handler_fecha , .handler_bien, .handler_sistema, .handler_fisico, .handler_diferencia{
+    width: 5%;
+    text-align: center;
+}
+
 .handler_Barcode{
     width: 30%;
     text-align: center;
 }
 
 .handler_for_product{
-    font-size: 1rem;
+    font-size: 13px;
     text-align: justify;
 }
 
-.handler_for_Barcode > div{
-    margin:auto;
+.handler_for_Barcode {
+    text-align: center;
 }

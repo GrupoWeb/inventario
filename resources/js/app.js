@@ -17,7 +17,9 @@ window.Vue = require('vue');
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/es';
+import VueBarcodeScanner from 'vue-barcode-scanner'
 Vue.use(ElementUI,{locale});
+Vue.use(VueBarcodeScanner);
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,6 +36,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('sidebar-component', require('./components/sidebar/sidebar.vue').default);
 Vue.component('product-component', require('./components/product/formProduct.vue').default);
 Vue.component('active-component', require('./components/active/formActive.vue').default);
+Vue.component('scanner-component', require('./components/Scanner/scanner.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

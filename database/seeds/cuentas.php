@@ -22,7 +22,7 @@ class cuentas extends Seeder
         $unidad = new cuentas_activo;
         $unidad->id_cuenta = $id;
         $unidad->numero_cuenta = "1232.03";
-        $unidad->descripcion = "DE OFICINA Y MUEBLES";
+        $unidad->descripcion = "INVENTARIO INICIAL";
         $unidad->save();
     }
 }

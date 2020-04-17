@@ -21,7 +21,7 @@ class dependencia extends Seeder
 
         $unidad = new dependencias;
         $unidad->id_dependencia = $id;
-        $unidad->descripcion = "Tecnologías de la Información";
+        $unidad->descripcion = "MINISTERIO DE ECONOMIA";
         $unidad->save();
     }
 }

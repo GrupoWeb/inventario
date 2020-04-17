@@ -13,16 +13,16 @@ class categorias extends Seeder
      */
     public function run()
     {
-        $data = new sequences;
-        $data->name = "categorias";
-        $data->value = 1;
-        $data->save();
-        $id = $data->value;
-
+        // $data = new sequences;
+        // $data->name = "categorias";
+        // $data->value = 1;
+        // $data->save();
+        // $id = $data->value;
+        
         $unidad = new categoria;
         $unidad->id_categoria = $id;
-        $unidad->id_grupo = 1;
-        $unidad->name = "MAQUINARIA Y EQUIPO";
+        $unidad->id_grupo = 3;
+        $unidad->name = "BIENES PREEXISTENTES";
         $unidad->save();
     }
 }
