@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(grupos::class);
         $this->call(documento_respaldos::class);
         $this->call(secuencia_fac::class);
-        $this->call(cuentas::class);
+        // $this->call(cuentas::class);
         $this->call(dependencia::class);
         $this->call(PersonDataSeeder::class);
 

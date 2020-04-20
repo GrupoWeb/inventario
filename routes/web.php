@@ -66,4 +66,5 @@ Route::get('barCode','BarCode@BarCodeAll');
   /****Inventario Inicial */
 
   Route::get('Inicial','InventarioInicial@SetCategory');
+  Route::get('inventarioinicial','initialCharge@setDataDB_03');
   /********************* */
