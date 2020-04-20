@@ -27,6 +27,10 @@
                     <a class="nav-link" href="./search">
                         <i class="nav-icon fas fa-barcode"></i> Ticket</a>
                 </li>                
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./inventarioFisico">
+                        <i class="nav-icon fas fa-barcode"></i> Inventario Físico</a>
+                </li>                
             </ul>
         </li>
         <!-- <li class="nav-item nav-dropdown">

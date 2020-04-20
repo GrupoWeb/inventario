@@ -13,7 +13,8 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('getYear','catalogo@getYear');
 Route::get('sequence/{table}','catalogo@sequences_data');
 Route::post('barCode','BarCode@barcodeGet');
-Route::get('barCode','BarCode@BarCodeAll');
+Route::get('barCode/{account}','BarCode@BarCodeAll');
+Route::get('inventarioFisico','inventario@showInventory');
 
 
 
@@ -55,9 +56,10 @@ Route::get('barCode','BarCode@BarCodeAll');
 
   /** Printer BarCode */
 
-  Route::get('printer','BarCode@BarCodePrinter');
+  Route::get('printer/{data_account}','BarCode@BarCodePrinter');
   Route::get('search','inventario@showSearch'); 
   Route::get('printCode/{code}','BarCode@GetBarCodeById');
+  Route::get('searchCode/{code}','BarCode@GetSearchCodeById');
   Route::get('List','inventario@showList');
   /******************** */
 
@@ -67,4 +69,5 @@ Route::get('barCode','BarCode@BarCodeAll');
 
   Route::get('Inicial','InventarioInicial@SetCategory');
   Route::get('inventarioinicial','initialCharge@setDataDB_03');
+  Route::get('getAccountInitial','inventario@getAccountInitial');
   /********************* */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Milon\Barcode\DNS1D;
 use App\Model\bienes_activos;
+use Illuminate\Support\Facades\DB;
 
 
 class BarCode extends Controller
@@ -14,9 +15,12 @@ class BarCode extends Controller
         return $code;
     }
 
-    public function BarCodeAll(){
+    public function BarCodeAll($account){
+       
+      
         $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
-                    ->join('productos','productos.id_producto','=','activos.id_producto')->get();
+                    ->join('productos','productos.id_producto','=','activos.id_producto')
+                    ->where('id_cuenta','=',$account)->get();
 
         return $activos;
         
@@ -25,15 +29,19 @@ class BarCode extends Controller
         // ]);
     }
 
-    public function BarCodePrinter(){
-        $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin')
-                    ->join('productos','productos.id_producto','=','activos.id_producto')->get();
-        
+    public function BarCodePrinter($data_account){
+      
+        $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
+                    ->join('productos','productos.id_producto','=','activos.id_producto')
+                    ->where('id_cuenta','=',$data_account)->get();
+        $id = 1;
+
                     $pdf = \PDF::loadView('active.PrinterBarcode',[
-                        "activos" => $activos
+                        "activos" => $activos,
+                        "id" => $id
                     ]);
-                    // $pdf->setPaper('Legal', 'landscape');
-                    $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+                    $pdf->setPaper('letter', 'portrait');
+                    // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
                     return $pdf->stream("Códigos de Barra".'.pdf'); 
     }
 
@@ -168,6 +176,17 @@ class BarCode extends Controller
                 ';
         }
         return $html;
+        
+    }
+
+    public function GetSearchCodeById($code){
+        $code_data = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
+                        ->join('productos','productos.id_producto','=','activos.id_producto')
+                        ->where('id_cuenta','=',$data_account)->get();
+    
+        
+
+        return $code_data;
         
     }
 

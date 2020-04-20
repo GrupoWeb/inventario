@@ -14,7 +14,7 @@ class Activos extends Migration
     public function up()
     {
         Schema::create('activos', function (Blueprint $table) {
-            $table->integer('id_activo')->primary()->unsigned();
+            $table->integer('id_activo')->primary()->unsigned(); 
             $table->string('fecha_fiscal');
             $table->integer('id_entidad')->unsigned();// ya
             $table->integer('id_unidad')->unsigned(); //ya

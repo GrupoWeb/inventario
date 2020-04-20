@@ -7,6 +7,7 @@ use App\Model\bienes_activos;
 use App\Model\sequences;
 use App\Model\product;
 use Carbon\Carbon;
+use App\Model\cuentas_activo;
 use Illuminate\Support\Facades\DB;
 
 class inventario extends Controller
@@ -34,6 +35,10 @@ class inventario extends Controller
 
     public function showList(){
         return view('active.Barcode');
+    }
+
+    public function showInventory(){
+        return view('Scanner.scannerSearch');
     }
 
     public function sequences_data($tabla){
@@ -143,5 +148,11 @@ class inventario extends Controller
             DB::rollBack();
             return response()->json($th,500);
         }
+    }
+
+
+    public function getAccountInitial(){
+        $account = cuentas_activo::all();
+        return response()->json($account,200);
     }
 }

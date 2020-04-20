@@ -38,6 +38,7 @@ Vue.component('product-component', require('./components/product/formProduct.vue
 Vue.component('active-component', require('./components/active/formActive.vue').default);
 Vue.component('scanner-component', require('./components/Scanner/scanner.vue').default);
 Vue.component('printreport-component', require('./components/Scanner/report.vue').default);
+Vue.component('checkinventory-component', require('./components/Scanner/scannerSearch.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
