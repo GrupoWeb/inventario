@@ -180,13 +180,13 @@ class BarCode extends Controller
     }
 
     public function GetSearchCodeById($code){
+
+        
         $code_data = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
                         ->join('productos','productos.id_producto','=','activos.id_producto')
-                        ->where('id_cuenta','=',$data_account)->get();
-    
-        
+                        ->where('codigo_sicoin','=',$code)->get();
 
-        return $code_data;
+        return response()->json($code_data,200);
         
     }
 
