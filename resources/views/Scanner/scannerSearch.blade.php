@@ -9,5 +9,5 @@
     </div>
 @endsection
 @section('breadcrumb')
-    Impresión de Código de Barras
+    Inventario de Bienes
 @endsection

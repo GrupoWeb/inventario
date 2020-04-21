@@ -17,12 +17,14 @@
             </el-col>
         </el-row>
         <div v-show="show_table">
-            <el-link :underline="false" v-bind:href="'/printer/'+select_item" 
+            <!-- <el-link :underline="false" v-bind:href="'/printer/'+select_item" 
                 class=" mt-3 mb-3" target="_blank"
                 >
                     <el-button type="success" icon="el-icon-printer"></el-button>
             </el-link>
-            <el-button  class="my-5" type="success"  @click="exportExcel" >Exportar</el-button>
+            
+            <el-button  class="my-5" type="success"  @click="exportExcel" >Exportar</el-button> -->
+            <el-button  class="my-5" type="success" icon="el-icon-printer" @click="download" ></el-button>
             <!-- <a href="./printer/" class="btn btn-primary  mt-3 mb-3" target="_blank">
                                 <i class="fas fa-print"></i> 
                             </a> -->
@@ -50,7 +52,7 @@
                     @current-change="current_change"
                 ></el-pagination>
             </div>
-            <div v-show="show_table_hidden"> 
+            <div v-show="show_table_hidden" ref="content"> 
                 <table class="table table-bordered border my-2" id='exportData'>
                               <thead>
                                     <tr class="thead-dark">
@@ -110,8 +112,13 @@
             }
 </style>
 <script>
-      import FileSaver from 'file-saver'
-      import XLSX from 'xlsx'
+        import FileSaver from 'file-saver'
+        import XLSX from 'xlsx'
+        import jsPDF from 'jspdf' 
+        import html2canvas from "html2canvas"
+        import domtoimage from "dom-to-image";
+        import 'jspdf-autotable'
+
 export default {
     data() {
         return {
@@ -134,6 +141,18 @@ export default {
         this.getAccount();
     },
     methods: {
+        download() {
+        const doc = new jsPDF();
+
+        doc.autoTable({html: '#exportData'});
+        doc.save('Informe de Cuentas.pdf')
+
+        // const contentHtml = this.$refs.content.innerHTML;
+        // doc.fromHTML(contentHtml, 15, 15, {
+        //     width: 170
+        // });
+        // doc.save("sample.pdf");
+        },
         getAccount(){
             axios.get(this.url.getAccountInitial).then(response => {
                 this.items_account = response.data;
@@ -178,6 +197,48 @@ export default {
             const filename = 'devschile-admins'
             XLSX.utils.book_append_sheet(workbook, data, filename)
             XLSX.writeFile(workbook, `${filename}.xlsx`)
+        },
+
+        downloadWithCSS() {
+            const doc = new jsPDF();
+            /** WITH CSS */
+            var canvasElement = document.createElement('canvas');
+                html2canvas(this.$refs.content, { canvas: canvasElement 
+                }).then(function (canvas) {
+                const img = canvas.toDataURL("image/jpeg", 0.8);
+                doc.addImage(img,'JPEG',20,20);
+                doc.save("sample.pdf");
+            });
+        },
+        downloadWithCSS2() {
+
+        /** WITH CSS */
+            domtoimage
+            .toPng(this.$refs.content)
+            .then(function(dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            const doc = new jsPDF({
+                orientation: "portrait",
+                // unit: "pt",
+                format: [900, 1400]
+            });
+            doc.addImage(img, "JPEG", 20, 20);
+            const date = new Date();
+            const filename =
+                "timechart_" +
+                date.getFullYear() +
+                ("0" + (date.getMonth() + 1)).slice(-2) +
+                ("0" + date.getDate()).slice(-2) +
+                ("0" + date.getHours()).slice(-2) +
+                ("0" + date.getMinutes()).slice(-2) +
+                ("0" + date.getSeconds()).slice(-2) +
+                ".pdf";
+            doc.save(filename);
+            })
+            .catch(function(error) {
+            console.error("oops, something went wrong!", error);
+            });
         },
     },
 }

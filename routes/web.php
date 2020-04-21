@@ -71,3 +71,7 @@ Route::get('inventarioFisico','inventario@showInventory');
   Route::get('inventarioinicial','initialCharge@setDataDB_03');
   Route::get('getAccountInitial','inventario@getAccountInitial');
   /********************* */
+
+  /*** Inventario */
+Route::post('setCountInventory','inventario@setCountInventory');
+  /************** */
