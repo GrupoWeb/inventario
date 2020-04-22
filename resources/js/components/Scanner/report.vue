@@ -28,7 +28,7 @@
             <!-- <a href="./printer/" class="btn btn-primary  mt-3 mb-3" target="_blank">
                                 <i class="fas fa-print"></i> 
                             </a> -->
-            <el-table
+            <!-- <el-table
                 :data="bien.slice(
                                 (currentPage - 1) * pagesize,
                                 currentPage * pagesize
@@ -51,7 +51,7 @@
                     :total="total"
                     @current-change="current_change"
                 ></el-pagination>
-            </div>
+            </div> -->
             <div v-show="show_table_hidden" ref="content"> 
                 <table class="table table-bordered border my-2" id='exportData'>
                               <thead>
@@ -103,7 +103,7 @@
                   text-align: center;
             }
             .handler_for_description{
-                  font-size: 12px;
+                  font-size: 8px;
                   text-align: justify;
             }
 
@@ -133,7 +133,7 @@ export default {
                     getAccountInitial: 'getAccountInitial',
                 },    
             show_table: false,
-            show_table_hidden: false,
+            show_table_hidden: true,
         }
     },
     mounted() {
@@ -144,7 +144,16 @@ export default {
         download() {
         const doc = new jsPDF();
 
-        doc.autoTable({html: '#exportData'});
+        doc.autoTable({
+            html: '#exportData',
+            theme: 'striped',
+            styles: {cellWidth: 'auto', fontSize: 8, halign: 'center'},
+            bodyStyles: {fontSize: 8, halign: 'left'},
+            overflow: 'linebreak',
+           
+            
+            
+            });
         doc.save('Informe de Cuentas.pdf')
 
         // const contentHtml = this.$refs.content.innerHTML;

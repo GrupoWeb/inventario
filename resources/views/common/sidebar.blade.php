@@ -31,6 +31,10 @@
                     <a class="nav-link" href="./inventarioFisico">
                         <i class="nav-icon fas fa-dolly-flatbed"></i> Inventario Físico</a>
                 </li>                
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./Reporteinventario">
+                        <i class="nav-icon fas fa-file-invoice"></i> Reporte</a>
+                </li>                
             </ul>
         </li>
         <!-- <li class="nav-item nav-dropdown">

@@ -37,6 +37,9 @@ class inventario extends Controller
     public function showList(){
         return view('active.Barcode');
     }
+    public function showReport(){
+        return view('active.reportInventory');
+    }
 
     public function showInventory(){
         return view('Scanner.scannerSearch');

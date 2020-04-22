@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Milon\Barcode\DNS1D;
 use App\Model\bienes_activos;
+use App\Model\checkInventory;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,6 +24,22 @@ class BarCode extends Controller
                     ->where('id_cuenta','=',$account)->get();
 
         return $activos;
+        
+        // return view('active.Barcode',[
+        //     "activos" => $activos
+        // ]);
+    }
+    public function BarCodeAllReport(Request $request){
+       
+        
+        // $report = checkInventory::selectRaw('activos.id_activo as code','productos.descripcion as producto','activos.codigo_sicoin as sicoin','activos.fecha_ingreso as fecha','activos.cantidad as cantidad','check_inventories.fisico','(activos.cantidad - check_inventories.fisico) as diferencia','check_inventories.lugar','check_inventories.empleado')
+        $report = checkInventory::selectRaw('activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,check_inventories.fisico,check_inventories.lugar,check_inventories.empleado,
+        (activos.cantidad - check_inventories.fisico) AS diferencia')
+                    ->join('activos','activos.id_activo','=','check_inventories.id_activo')
+                    ->join('productos','productos.id_producto','=','activos.id_producto')
+                    ->where('activos.id_cuenta','=',$request->account)->get();
+    
+        return $report;
         
         // return view('active.Barcode',[
         //     "activos" => $activos
