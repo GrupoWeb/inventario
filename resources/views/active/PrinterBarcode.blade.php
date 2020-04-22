@@ -6,17 +6,27 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Invetario</title>
       <style>
+
+            @page{
+                  margin-left: 2cm;
+                  margin-right:2cm;
+                  margin-top:2cm;
+                  margin-bottom:2cm;
+            }
+
+
+            *{
+                  font-size: 12px;
+                  font-family: "Times New Roman";
+            }
             
             .container {
-                  width: 100%;
-                  padding-right: 15px;
-                  padding-left: 15px;
-                  margin-right: auto;
-                  margin-left: auto;
+                  width: 100%;    
             }
             .handler_producto {
-                  width: 70%;
+                  width: 5%;
                   text-align: center;
+                 
             }
 
             .handler_Barcode{
@@ -25,7 +35,11 @@
             }
 
             .handler_for_product{
-                  font-size: 16px;
+                  font-size: 12px;
+                  text-align: center;
+            }
+            .handler_for_description{
+                  font-size: 12px;
                   text-align: justify;
             }
 
@@ -33,67 +47,88 @@
                   margin:auto;
             }
 
-            .table-bordered {
-                  border: 1px solid #dee2e6;
+            /* .table-bordered {
+                  border: 1px solid #000;
             }
 
             .table-bordered th,
             .table-bordered td {
-                  border: 1px solid #dee2e6 !important;
+                  border: 1px solid #000 !important;
             }
 
             
             .table-bordered thead th,
             .table-bordered thead td {
                   border-bottom-width: 2px;
-            }
+            } */
 
             table {
-                  border-collapse: collapse;
-            }
-
-            .table {
+                  font-family: verdana !important;
+                  font-size: 11px;
                   width: 100%;
-                  margin-bottom: 1rem;
-                  color: #212529;
+                  border-spacing: 0;
+                  border-collapse: collapse;
+                  border: none;
             }
 
-            .table th,
-            .table td {
-                  padding: 0.75rem;
-                  vertical-align: top;
-                  border-top: 1px solid #dee2e6;
+            .table-sm th,
+            .table-sm td {
+                  padding: 0.3rem;
+            }
+            
+            .border {
+                  border: 1px solid #000 !important;
+            }
+            .table-bordered {
+            border: 1px solid #dee2e6;
+            }
+            .table-bordered th,
+            .table-bordered td {
+                  border: 1px solid #dee2e6;
+            }
+            .table-bordered thead th,
+            .table-bordered thead td {
+                  border-bottom-width: 2px;
+            }
+            .mb-2,
+            .my-2 {
+                  margin-top: 1.2rem !important;
             }
 
-            .table thead th {
-                  vertical-align: bottom;
-                  border-bottom: 2px solid #dee2e6;
+            .border  tr, .border th, .border td{
+                border: 1px solid #000 !important;
             }
-
-            .table tbody + tbody {
-                  border-top: 2px solid #dee2e6;
-            }
+            
 
       </style>
 </head>
 <body>
-      <div class="container">
-            <div class="col-md-12">
-                  <div class="table-responsive-sm">
-                        <table class="table table-bordered">
+      <div >
+            <div >
+                  <div class="container">
+                        <table class="table table-bordered border my-2">
                               <thead>
                                     <tr class="thead-dark">
-                                          <th class="handler_producto">Producto</th>
-                                          <th class="handler_Barcode">Código de Barra</th>
+                                          <th class="handler_producto">No.</th>
+                                          <th class="handler_producto">Fecha</th>
+                                          <th class="handler_producto">No. Bien</th>
+                                          <th class="handler_Barcode">Producto</th>
+                                          <th class="handler_producto">Sistema</th>
+                                          <th class="handler_producto">Físico</th>
+                                          <th class="handler_producto">Direfencia</th>
                                     </tr>
                               </thead>
                               <tbody>
-                                    @foreach( $activos as $productos)
+                                    @foreach( $activos as $index => $productos)
                                           <tr>
-                                                <td class="handler_for_product">{{ $productos->descripcion }}</td>
-                                                <td class="handler_for_Barcode">
-                                                      {!! DNS1D::getBarcodeHTML($productos->codigo_sicoin,"C128",2,80,'black',true) !!}
-                                                </td>
+                                                <td class="handler_for_product">{{ ($index+1) }}</td>
+                                                <td class="handler_for_product">{{ $productos->fecha_ingreso }}</td>
+                                                <td class="handler_for_product">{{ $productos->codigo_sicoin }}</td>
+                                                <td class="handler_for_description">{{ $productos->descripcion }}</td>
+                                                <td class="handler_for_product">{{ $productos->cantidad }}</td>
+                                                <td class="handler_for_product"></td>
+                                                <td class="handler_for_product"></td>
+                                                
                                           </tr>
                                     @endforeach
                               </tbody>

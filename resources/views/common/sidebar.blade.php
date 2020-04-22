@@ -20,12 +20,20 @@
                         <i class="nav-icon fas fa-edit"></i> Ingreso</a>
                 </li>
                 <li class="nav-item ml-3">
-                    <a class="nav-link" href="./barCode">
-                        <i class="nav-icon fas fa-barcode"></i> Código de Barras</a>
+                    <a class="nav-link" href="./List">
+                        <i class="nav-icon fas fa-file-invoice"></i> Cuentas</a>
                 </li>
                 <li class="nav-item ml-3">
                     <a class="nav-link" href="./search">
-                        <i class="nav-icon fas fa-barcode"></i> Ticket</a>
+                        <i class="nav-icon fas fa-ticket-alt"></i> Ticket</a>
+                </li>                
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./inventarioFisico">
+                        <i class="nav-icon fas fa-dolly-flatbed"></i> Inventario Físico</a>
+                </li>                
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./Reporteinventario">
+                        <i class="nav-icon fas fa-file-invoice"></i> Reporte</a>
                 </li>                
             </ul>
         </li>

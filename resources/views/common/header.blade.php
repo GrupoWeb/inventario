@@ -2,7 +2,7 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./">
         <img class="navbar-brand-full" src="imagenes/gobierno.jpg" width="89" height="25" alt="CoreUI Logo">
         <img class="navbar-brand-minimized" src="imagenes/gobierno.jpg" width="30" height="30" alt="CoreUI Logo">
     </a>
@@ -18,7 +18,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-header text-center">
-                    <strong>Settings</strong>
+                    <strong>Herramientas</strong>
                 </div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
