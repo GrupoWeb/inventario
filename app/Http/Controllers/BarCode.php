@@ -65,6 +65,7 @@ class BarCode extends Controller
 
     public function GetBarCodeById($code){
         $code_data = bienes_activos::select('codigo_sicoin')->where('codigo_sicoin','=',$code)->count();
+        
         if($code_data == 0){
             $html = '<!DOCTYPE html>
                 <html lang="en">
@@ -75,18 +76,7 @@ class BarCode extends Controller
                     <title>INVENTARIO</title>
                     <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
                     <style>
-                        @page :left{
-                            margin-left: 3cm
-                            margin-right:4cm
-                        }
-                        @page :right{
-                            margin-left: 4cm
-                            margin-right:3cm
-                        }
-                        @page :firsts{
-                            margin-top: 4cm
-                            
-                        }
+                        @page { size:2in 1in; margin: 2cm }
                         * {
                             font-size: 12px;
                             font-family: "Times New Roman";
@@ -125,6 +115,7 @@ class BarCode extends Controller
                 ';
         }else{
             $code_data = bienes_activos::select('codigo_sicoin')->where('codigo_sicoin','=',$code)->get();
+            $code = ' <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />';
             $html = '<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -135,26 +126,16 @@ class BarCode extends Controller
                     
                     <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
                     <style>
-                        @page :left{
-                            margin-left: 3cm
-                            margin-right:4cm
-                        }
-                        @page :right{
-                            margin-left: 4cm
-                            margin-right:3cm
-                        }
-                        @page :firsts{
-                            margin-top: 4cm
-                            
-                        }
-
+                        @page { size:2in 1in; margin: 0cm}
                         * {
+                            padding:0 auto;
                             font-size: 12px;
                             font-family: "Times New Roman";
                         }
                         
                         
                         
+
                         .centrado {
                             text-align: center;
                             align-content: center;
@@ -163,8 +144,10 @@ class BarCode extends Controller
                         .ticket {
                             padding:0 auto;
                             margin:0 auto;
-                            width: 155px;
-                            max-width: 155px;
+                            width: 150px;
+                            max-width: 130px;
+                            padding-left: -70px;
+                            padding-top:30px;
                         }
                         
                         img {
@@ -177,22 +160,21 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                    <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
-                    
+                        <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
                             
                     </div>
                     <script>
-                            
-                
-                            $(document).ready(function() {
-                                window.print();
-                            });
                     </script>
                 </body>
                 </html>
                 ';
         }
-        return $html;
+
+        $pdf = \PDF::loadHtml($html);
+        $pdf->setPaper('A9', 'landscape');
+        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        return $pdf->stream("Códigos de Barra".'.pdf'); 
+        // return $html;
         
     }
 

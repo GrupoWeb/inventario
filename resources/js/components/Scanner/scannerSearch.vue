@@ -12,10 +12,10 @@
                 :rules="rules"
                 label-width="150px">
                 <el-form-item label="SICOIN" prop="name">
-                    <el-input v-model="form.name" autofocus ref="autoInput"></el-input>
+                    <el-input v-model="form.name" autofocus ref="autoInput" @keyup="enter($event)" ></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" icon="el-icon-search" @click="onSubmit('form')" ></el-button>
+                    <el-button type="primary" icon="el-icon-search" @click="onSubmit('form',$event)" ></el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -211,7 +211,13 @@ export default {
                 });
             
         },
-        onSubmit(form) {
+
+        enter(form,event){
+            event.preventDefault();
+            this.onSubmit(form,event);
+        },
+        onSubmit(form,event) {
+            event.preventDefault();
             const h = this.$createElement;
             this.$refs[form].validate(valid => {
                 if (valid) {

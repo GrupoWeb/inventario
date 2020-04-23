@@ -7,7 +7,9 @@
       <title>Document</title>
       <link rel="stylesheet" href="{{public_path('codigo_barra/customCode.css')}}">
       <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
-      
+      <style>
+            @page { size:2in 1in; margin: 2cm }
+      </style>
 
 </head>
 <body>
