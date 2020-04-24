@@ -133,9 +133,6 @@ class BarCode extends Controller
                             font-family: "Times New Roman";
                         }
                         
-                        
-                        
-
                         .centrado {
                             text-align: center;
                             align-content: center;
@@ -144,9 +141,9 @@ class BarCode extends Controller
                         .ticket {
                             padding:0 auto;
                             margin:0 auto;
-                            width: 150px;
-                            max-width: 130px;
-                            padding-left: -70px;
+                            width: 170px;
+                            max-width: 170px;
+                            padding-left: -85px;
                             padding-top:30px;
                         }
                         
@@ -160,10 +157,12 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                        <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
-                            
+                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />   
                     </div>
                     <script>
+                        $(document).ready(function(){
+                            window.print();
+                        });
                     </script>
                 </body>
                 </html>
