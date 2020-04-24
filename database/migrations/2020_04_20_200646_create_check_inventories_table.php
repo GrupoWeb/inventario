@@ -19,7 +19,7 @@ class CreateCheckInventoriesTable extends Migration
             $table->integer('fisico');
             $table->timestamps();
 
-            $table->foreign('id_bien')->references('activos')->on('id_activo');
+            /* $table->foreign('id_bien')->references('activos')->on('id_activo'); */
         });
     }
 

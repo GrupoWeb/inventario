@@ -68,6 +68,6 @@ Route::get('inventarioFisico','inventario@showInventory');
   /****Inventario Inicial */
 
   Route::get('Inicial','InventarioInicial@SetCategory');
-  Route::get('inventarioinicial','initialCharge@setDataDB_03');
+  Route::get('inventarioinicial','initialCharge@setDataDB_04');
   Route::get('getAccountInitial','inventario@getAccountInitial');
   /********************* */
