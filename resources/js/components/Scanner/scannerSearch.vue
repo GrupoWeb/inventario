@@ -10,12 +10,15 @@
                 ref="form"
                 :model="form"
                 :rules="rules"
-                label-width="150px">
-                <el-form-item label="SICOIN" prop="name">
-                    <el-input v-model="form.name" autofocus ref="autoInput"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" icon="el-icon-search" @click="onSubmit('form')" ></el-button>
+                label-width="150px"
+                onSubmit={form.onSubmit}
+                >
+                    <el-form-item label="SICOIN" prop="name">
+                        <el-input v-model="form.name" autofocus ref="autoInput" @keyup.enter.native.prevent="enter_onSubmit()" ></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" icon="el-icon-search" @click="onSubmit('form')" ></el-button>
+                        <el-button @click="reset">Cancel</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -69,7 +72,7 @@
                                         <el-button type="primary" @click.prevent="updateInventory('formInventory')">Guardar</el-button>
                                         <el-button @click="reset">Cancel</el-button>
                                     </el-form-item>
-                            </el-form>
+                                </el-form>
                             </div>
                         </div>
                     </div>
@@ -107,6 +110,7 @@ export default {
                 empleado: "",
             },
             id_activo_data:"",
+            
             showCard: false,
             listProduct: [],
             rules: {
@@ -150,7 +154,23 @@ export default {
             loading: false
         }
     },
+    mounted() {
+        this.enterbloqueado();
+    },
     methods: {
+        enterbloqueado(){
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input[type=text]').forEach( node => node.addEventListener('keypress', e => {
+                if(e.keyCode == 13) {
+                    e.preventDefault();
+                    
+                }
+            }))
+            });
+        },
+        enter_onSubmit(){
+            this.onSubmit('form');
+        },
         reset() {
             this.form.name = "";
             this.formInventory.fisico = "";
@@ -211,7 +231,13 @@ export default {
                 });
             
         },
+
+        enter(form,event){
+            event.preventDefault();
+            this.onSubmit(form,event);
+        },
         onSubmit(form) {
+           
             const h = this.$createElement;
             this.$refs[form].validate(valid => {
                 if (valid) {
@@ -220,12 +246,24 @@ export default {
                     axios
                         .get(this.urlData.searchCode+this.form.name)
                         .then(response => {
-                            const status = JSON.parse(response.status); 
-                            this.listProduct = response.data;
-                            this.id_activo_data = response.data[0].id_activo;
-                            if (status == "200") {
-                                this.loading = false;                               
+                            if(response.data.length == 0){
+                                this.loading = false;   
+                                this.showCard = false;
+                                this.$notify({
+                                    title: 'Warning',
+                                    message: 'No se encuentra información para el código',
+                                    type: 'warning'
+                                }); 
+                            }else{
+                                const status = JSON.parse(response.status); 
+                                this.listProduct = response.data;
+                                if (status == "200") {
+                                    this.id_activo_data = response.data[0].id_activo;
+                                    this.loading = false;                               
+                                }
+
                             }
+                            
                         });
                 } else {
                     this.$message.error({

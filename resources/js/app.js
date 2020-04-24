@@ -39,6 +39,7 @@ Vue.component('scanner-component', require('./components/Scanner/scanner.vue').d
 Vue.component('printreport-component', require('./components/Scanner/report.vue').default);
 Vue.component('checkinventory-component', require('./components/Scanner/scannerSearch.vue').default);
 Vue.component('reportinventory-component', require('./components/Scanner/reportInventory.vue').default);
+Vue.component('index-component', require('./components/tablero/index.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
