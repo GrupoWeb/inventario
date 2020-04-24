@@ -69,7 +69,14 @@ Route::post('reportInventory','BarCode@BarCodeAllReport');
   /****Inventario Inicial */
 
   Route::get('Inicial','InventarioInicial@SetCategory');
-  Route::get('inventarioinicial','initialCharge@setDataDB_04');
+  Route::get('inventarioinicial1','initialCharge@setDataDB_01');
+  Route::get('inventarioinicial2','initialCharge@setDataDB_02');
+  Route::get('inventarioinicial3','initialCharge@setDataDB_03');
+  Route::get('inventarioinicial4','initialCharge@setDataDB_04');
+  Route::get('inventarioinicial5','initialCharge@setDataDB_05');
+  Route::get('inventarioinicial6','initialCharge@setDataDB_06');
+  Route::get('inventarioinicial7','initialCharge@setDataDB_07');
+  Route::get('inventarioinicial8','initialCharge@setDataDB_08');
   Route::get('getAccountInitial','inventario@getAccountInitial');
   /********************* */
 
