@@ -10,7 +10,6 @@ require('./bootstrap');
 require('pace-progress');
 require('perfect-scrollbar');
 require('@coreui/coreui');
-require('chart.js');
 
 window.Vue = require('vue');
 
@@ -39,6 +38,7 @@ Vue.component('active-component', require('./components/active/formActive.vue').
 Vue.component('scanner-component', require('./components/Scanner/scanner.vue').default);
 Vue.component('printreport-component', require('./components/Scanner/report.vue').default);
 Vue.component('checkinventory-component', require('./components/Scanner/scannerSearch.vue').default);
+Vue.component('reportinventory-component', require('./components/Scanner/reportInventory.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

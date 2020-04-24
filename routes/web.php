@@ -15,7 +15,8 @@ Route::get('sequence/{table}','catalogo@sequences_data');
 Route::post('barCode','BarCode@barcodeGet');
 Route::get('barCode/{account}','BarCode@BarCodeAll');
 Route::get('inventarioFisico','inventario@showInventory');
-
+Route::get('Reporteinventario','inventario@showReport');
+Route::post('reportInventory','BarCode@BarCodeAllReport');
 
 
 /**
@@ -71,3 +72,7 @@ Route::get('inventarioFisico','inventario@showInventory');
   Route::get('inventarioinicial','initialCharge@setDataDB_04');
   Route::get('getAccountInitial','inventario@getAccountInitial');
   /********************* */
+
+  /*** Inventario */
+Route::post('setCountInventory','inventario@setCountInventory');
+  /************** */
