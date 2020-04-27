@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\product;
 use App\Model\sequences;
-use Carbon\Carbon;
+
 use App\Model\entidad;
 use App\Model\unidaEjecutora;
 use App\Model\grupo;
@@ -52,9 +52,10 @@ class catalogo extends Controller
 
 
     public function getYear(){
-        $date = Carbon::now('America/Guatemala');
+        // $date = Carbon::now('America/Guatemala');
+        $date = date('Y');
 //        return $date->isoFormat('YYYY');
-        return response()->json($date->isoFormat('YYYY'),200);
+        return response()->json($date,200);
     }
 
     public function sequences_data($tabla){
