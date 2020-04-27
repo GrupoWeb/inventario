@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\bienes_activos;
 use App\Model\sequences;
 use App\Model\product;
-use Carbon\Carbon;
+
 use App\Model\cuentas_activo;
 use App\Model\checkInventory;
 use Illuminate\Support\Facades\DB;
@@ -73,8 +73,9 @@ class inventario extends Controller
     }
 
     public function getYear(){
-        $date = Carbon::now('America/Guatemala');
-        return response()->json($date->isoFormat('YYYY'),200);
+        // $date = Carbon::now('America/Guatemala');
+        $date = date('Y');
+        return response()->json($date,200);
     }
 
     public function addProductBienes($new_producto){
