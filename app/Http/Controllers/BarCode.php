@@ -169,7 +169,7 @@ class BarCode extends Controller
 
         $pdf = \PDF::loadHtml($html);
         $pdf->setPaper('A9', 'landscape');
-        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true]);
         return $pdf->stream("Códigos de Barra".'.pdf'); 
         // return $html;
         
