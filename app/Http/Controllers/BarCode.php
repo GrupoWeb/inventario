@@ -160,9 +160,7 @@ class BarCode extends Controller
                             <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />   
                     </div>
                     <script>
-                        $(document).ready(function(){
-                            window.print();
-                        });
+                        
                     </script>
                 </body>
                 </html>
@@ -172,8 +170,8 @@ class BarCode extends Controller
         $pdf = \PDF::loadHtml($html);
         $pdf->setPaper('A9', 'landscape');
         // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-        return $pdf->stream("Códigos de Barra".'.pdf'); 
-        // return $html;
+        // return $pdf->stream("Códigos de Barra".'.pdf'); 
+        return $html;
         
     }
 
