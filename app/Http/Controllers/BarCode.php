@@ -124,7 +124,7 @@ class BarCode extends Controller
                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
                     <title>INVENTARIO</title>
                     
-                    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+                    
                     <style>
                         @page { size:2in 1in; margin: 0cm}
                         * {
@@ -157,7 +157,7 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                            ' . DNS1D::getBarcodeHTML($code_data[0]['codigo_sicoin'], 'C128',2,80,'black',true) . ' 
+                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />   
                     </div>
                     <script>
                         
@@ -168,10 +168,10 @@ class BarCode extends Controller
         }
 
         $pdf = \PDF::loadHtml($html);
-        // $pdf->setPaper('A9', 'landscape');
+        $pdf->setPaper('A9', 'landscape');
         // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-        // return $pdf->stream("Códigos de Barra".'.pdf'); 
-        return $html;
+        return $pdf->stream("Códigos de Barra".'.pdf'); 
+        // return $html;
         
     }
 
