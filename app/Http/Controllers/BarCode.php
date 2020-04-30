@@ -192,10 +192,11 @@ class BarCode extends Controller
         // <img src="data:image/png;base64,' . DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
 
         $pdf = \PDF::loadHtml($html);
+        $html2 = 'test';
         $pdf->setPaper('A9', 'landscape');
         // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        return $pdf->stream("Códigos de Barra".'.pdf'); 
-        // return $html;
+        // return $pdf->stream("Códigos de Barra".'.pdf'); 
+        return $html2;
         
     }
 
