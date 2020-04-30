@@ -135,16 +135,7 @@ class BarCode extends Controller
             $code = ' <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />';
             $imagen = DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true);
 
-            $barcode = new BarcodeGenerator();
-            $barcode->setText($code_data[0]['codigo_sicoin']);
-            $barcode->setType(BarcodeGenerator::Code128);
-            $barcode->setScale(2);
-            $barcode->setThickness(25);
-            $barcode->setFontSize(10);
-            $code = $barcode->generate();
-
-            $img_code =  '<img src="data:image/png;base64,'.$code.'" />';
-
+         
 
             $path = public_path().$imagen;
             $img = '<img src="'.$path.'" alt="barcode" ';
@@ -189,7 +180,7 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                            '. $img_code . ' 
+                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
                     </div>
                     <script>
                         
