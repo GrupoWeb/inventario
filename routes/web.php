@@ -82,4 +82,5 @@ Route::post('reportInventory','BarCode@BarCodeAllReport');
 
   /*** Inventario */
 Route::post('setCountInventory','inventario@setCountInventory');
+Route::get('testBar','barcode@barTest');
   /************** */

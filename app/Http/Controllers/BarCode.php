@@ -7,10 +7,27 @@ use \Milon\Barcode\DNS1D;
 use App\Model\bienes_activos;
 use App\Model\checkInventory;
 use Illuminate\Support\Facades\DB;
+use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
+
 
 
 class BarCode extends Controller
 {
+    public function barTest(){
+        
+            $barcode = new BarcodeGenerator();
+            $barcode->setText("0123456789");
+            $barcode->setType(BarcodeGenerator::Code128);
+            $barcode->setScale(2);
+            $barcode->setThickness(25);
+            $barcode->setFontSize(10);
+            $code = $barcode->generate();
+
+            $img =  '<img src="data:image/png;base64,'.$code.'" />';
+
+        return $code;
+    }
+
     public function barcodeGet(Request $request){
         $code = '<div class="BarCode">'. DNS1D::getBarcodeHTML($request->codeBar,"C128",2,80,'black',false).'</div>';
         return $code;
@@ -116,6 +133,21 @@ class BarCode extends Controller
         }else{
             $code_data = bienes_activos::select('codigo_sicoin')->where('codigo_sicoin','=',$code)->get();
             $code = ' <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />';
+            $imagen = DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true);
+
+            $barcode = new BarcodeGenerator();
+            $barcode->setText($code_data[0]['codigo_sicoin']);
+            $barcode->setType(BarcodeGenerator::Code128);
+            $barcode->setScale(2);
+            $barcode->setThickness(25);
+            $barcode->setFontSize(10);
+            $code = $barcode->generate();
+
+            $img_code =  '<img src="data:image/png;base64,'.$code.'" />';
+
+
+            $path = public_path().$imagen;
+            $img = '<img src="'.$path.'" alt="barcode" ';
             $html = '<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -157,7 +189,7 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />   
+                            '. $img_code . ' 
                     </div>
                     <script>
                         
@@ -166,10 +198,11 @@ class BarCode extends Controller
                 </html>
                 ';
         }
+        // <img src="data:image/png;base64,' . DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
 
         $pdf = \PDF::loadHtml($html);
         $pdf->setPaper('A9', 'landscape');
-        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         return $pdf->stream("Códigos de Barra".'.pdf'); 
         // return $html;
         
