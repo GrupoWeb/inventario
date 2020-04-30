@@ -195,8 +195,8 @@ class BarCode extends Controller
         $html2 = 'test';
         $pdf->setPaper('A9', 'landscape');
         // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        // return $pdf->stream("Códigos de Barra".'.pdf'); 
-        return $html2;
+        return $pdf->stream("Códigos de Barra".'.pdf'); 
+        // return $html2;
         
     }
 
