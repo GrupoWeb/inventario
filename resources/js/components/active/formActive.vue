@@ -268,7 +268,7 @@
                                 <el-table-column label="Dirección" prop="business_address"></el-table-column>
                             </el-table>
                         </el-col>
-                    </el-row>
+                    </el-row> 
 <!--                    alza, baja, saldo, sicoin y codigo de barra-->
                     <el-row :gutter="10">
                         <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="4">
