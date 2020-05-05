@@ -67,7 +67,17 @@
                                     </el-form-item>
                                     <el-form-item label="Empleado:" prop="empleado">
                                         <el-input class="font_custom_input" v-model="formInventory.empleado"></el-input>
+                                        <!-- <el-input class="font_custom_input" v-model="formInventory.empleado" @change="searchProvider"></el-input> -->
                                     </el-form-item>
+                                    <el-row :gutter="10" v-show="visible">
+                                        <el-col :span="24">
+                                            <el-table :data="dataSatProvider" style="width: 100%">
+                                                <el-table-column label="Nit" prop="nit"></el-table-column>
+                                                <el-table-column label="Nombre" prop="name"></el-table-column>
+                                                <el-table-column label="Dirección" prop="business_address"></el-table-column>
+                                            </el-table>
+                                        </el-col>
+                                    </el-row>
                                     <el-form-item>
                                         <el-button type="primary" @click.prevent="updateInventory('formInventory')">Guardar</el-button>
                                         <el-button @click="reset">Cancel</el-button>
@@ -104,6 +114,7 @@ export default {
             form: {
                 name: "",
             },
+            visible: false,
             formInventory: {
                 fisico: "",
                 lugar: "",
@@ -146,9 +157,11 @@ export default {
                 ],
             },
             fullscreenLoading: false,
+            dataSatProvider: [],
             urlData: {
                     searchCode: "searchCode/",
                     setCountInventory: "setCountInventory",
+                    urlSat: "http://gestorquejas.diaco.gob.gt/Consulta/rs/proveedores/empresa?nit=",
                     
                 },
             loading: false
@@ -158,6 +171,24 @@ export default {
         this.enterbloqueado();
     },
     methods: {
+
+        searchProvider (){
+              this.visible = true;
+              this.nit = this.formInventory.empleado;
+              this.getProviderSat();
+        },
+        getProviderSat(){
+            const config = { headers: {'Content-Type': 'application/json'} };
+            axios.get(this.urlData.urlSat+this.nit,config).then(response => {
+                this.dataSatProvider = [];
+                console.log(this.nit)
+                this.dataSatProvider.push({
+                    nit: response.data.value.nitProveedor,
+                    name: response.data.value.nombre,
+                    business_address: response.data.value.direccion
+                });
+            })
+        },
         enterbloqueado(){
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('input[type=text]').forEach( node => node.addEventListener('keypress', e => {

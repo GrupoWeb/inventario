@@ -149,7 +149,7 @@ class BarCode extends Controller
                     
                     
                     <style>
-                        @page { size:2in 1in; margin: 0cm}
+                        @page { size:2in 0.9in; margin: 0cm}
                         * {
                             padding:0 auto;
                             font-size: 12px;
@@ -180,23 +180,25 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
+                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,60,array(0,0,0),true) . '" alt="barcode"   />
                     </div>
                     <script>
                         
                     </script>
                 </body>
-                </html>
-                ';
+                </html>';
         }
+        $code = '<div class="BarCode">'. DNS1D::getBarcodeHTML($code_data[0]['codigo_sicoin'],"C128",3,110,'black',true).'</div>';
+        $code2 = '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',3,110,array(0,0,0),true) . '" alt="barcode"  />';
         // <img src="data:image/png;base64,' . DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
 
         $pdf = \PDF::loadHtml($html);
         $html2 = 'test';
-        $pdf->setPaper('A9', 'landscape');
-        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        $paper_size = array(0,0,144,308);
+        $pdf->setPaper($paper_size, 'landscape');
+        // $pdf->setOptions(['dpi' => 120, 'defaultFont' => 'sans-serif']);
         return $pdf->stream("Códigos de Barra".'.pdf'); 
-        // return $html2;
+        // return $code2;
         
     }
 
