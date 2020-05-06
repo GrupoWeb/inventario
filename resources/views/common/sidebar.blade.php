@@ -1,7 +1,7 @@
 <nav class="sidebar-nav">
     <ul class="nav">
         {{-- <li class="nav-title"></li> --}}
-        <li class="nav-item nav-dropdown">
+        <!-- <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-book-open"></i> Catálogo</a>
             <ul class="nav-dropdown-items">
@@ -10,7 +10,7 @@
                         <i class="nav-icon fas fa-user-plus"></i> Producto</a>
                 </li>
             </ul>
-        </li>
+        </li> -->
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-address-book"></i> Activos</a>
