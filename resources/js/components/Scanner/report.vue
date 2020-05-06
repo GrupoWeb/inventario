@@ -62,7 +62,7 @@
                                           <th class="handler_Barcode">Producto</th>
                                           <th class="handler_producto">Sistema</th>
                                           <th class="handler_producto">Físico</th>
-                                          <th class="handler_producto">Direfencia</th>
+                                          <th class="handler_producto">Diferencia</th>
                                     </tr>
                               </thead>
                               <tbody>
