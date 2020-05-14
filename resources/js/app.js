@@ -41,6 +41,12 @@ Vue.component('checkinventory-component', require('./components/Scanner/scannerS
 Vue.component('reportinventory-component', require('./components/Scanner/reportInventory.vue').default);
 Vue.component('index-component', require('./components/tablero/index.vue').default);
 
+
+Vue.component('unidad-component', require('./components/admin/unidades.vue').default);
+Vue.component('entidad-component', require('./components/admin/entidades.vue').default);
+Vue.component('usuario-component', require('./components/admin/usuarios.vue').default);
+Vue.component('visualizar-component', require('./components/admin/visualizar.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -84,3 +84,15 @@ Route::post('reportInventory','BarCode@BarCodeAllReport');
 Route::post('setCountInventory','inventario@setCountInventory');
 Route::get('testBar','barcode@barTest');
   /************** */
+  /*** Administrativo */
+Route::post('setUnidad','catalogo@setUnidad');
+Route::get('showunidades','catalogo@showUnidad');
+Route::get('getUnit','catalogo@getUnit');
+Route::get('showEntidad','catalogo@showEntidad');
+Route::post('setEntidad','catalogo@setEntidad');
+Route::get('showUsuarios','catalogo@showUsuarios');
+Route::get('getUser','catalogo@getUser');
+Route::post('registerUser','catalogo@createUser');
+Route::get('visualizar', 'catalogo@visualizar');
+
+  /************** */
