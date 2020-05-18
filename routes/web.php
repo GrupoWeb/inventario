@@ -94,5 +94,9 @@ Route::get('showUsuarios','catalogo@showUsuarios');
 Route::get('getUser','catalogo@getUser');
 Route::post('registerUser','catalogo@createUser');
 Route::get('visualizar', 'catalogo@visualizar');
+Route::post('setDataExcel','Inventario\ControllerInitial@setDataExcel');
+Route::get('getRoles','catalogo@getRoles');
+Route::get('roles','catalogo@showroles');
+Route::post('setRoles','catalogo@setRoles');
 
   /************** */

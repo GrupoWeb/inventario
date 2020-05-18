@@ -19,6 +19,7 @@ use App\Model\dependencias;
 use App\Model\cuentas_activo;
 use App\Model\documentos_respaldo;
 use App\Model\secuencias_factura;
+use App\Model\roles_user;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -57,6 +58,15 @@ class catalogo extends Controller
         $date = date('Y');
 //        return $date->isoFormat('YYYY');
         return response()->json($date,200);
+    }
+
+    public function getRoles(){
+        $rol = roles_user::all();
+        return response()->json($rol,200);
+    }
+
+    public function showroles(){
+        return view('admin.roles');
     }
 
     public function sequences_data($tabla){
@@ -114,6 +124,8 @@ class catalogo extends Controller
             $user->username = $request->username;
             $user->email = $request->email;
             $user->password = $hashedPassIn;
+            $user->admin = $request->admin;
+            $user->id_unidad = $request->id_unidad;
             $user->save();
             
             DB::commit();
@@ -157,9 +169,32 @@ class catalogo extends Controller
  
             $data = new unidaEjecutora;
     
-            $data->id_unidad = $secuencia->original->value;;
+            $data->id_unidad = $secuencia->original->value;
             $data->id_entidad = 1;
             $data->name = $request->name;
+            $data->save();
+
+            DB::commit();
+
+            return response()->json($data,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
+    }
+    public function setRoles(Request $request){ 
+
+        try {
+
+            DB::beginTransaction();
+            
+            $secuencia = $this->sequences_data("roles_users");
+            $secuencia = json_decode(json_encode($secuencia)) ;
+ 
+            $data = new roles_user;
+    
+            $data->id = $secuencia->original->value;
+            $data->description = $request->name;
             $data->save();
 
             DB::commit();

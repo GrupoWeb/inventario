@@ -46,6 +46,7 @@ Vue.component('unidad-component', require('./components/admin/unidades.vue').def
 Vue.component('entidad-component', require('./components/admin/entidades.vue').default);
 Vue.component('usuario-component', require('./components/admin/usuarios.vue').default);
 Vue.component('visualizar-component', require('./components/admin/visualizar.vue').default);
+Vue.component('roles-component', require('./components/admin/roles.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

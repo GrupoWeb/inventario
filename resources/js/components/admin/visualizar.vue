@@ -5,7 +5,7 @@
             <div class="card-header text-white bg-primary">Subir archivos</div>
             <div class="card-body">
                 <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-                    <el-form-item label="Unidad Ejecutora">
+                    <el-form-item label="Unidad Ejecutora" prop="unidad">
                         <el-select v-model="form.unidad" class="select_width" clearable filterable placeholder="Seleccionar">
                             <el-option
                                 v-for="item in list_response.list_unidad"
@@ -22,29 +22,41 @@
                                 v-for="item in list_response.list_cuenta"
                                 :key="item.id_cuenta"
                                 :label="item.descripcion"
-                                :value="item.id_cuenta"
+                                :value="item.id_cuenta" 
                                 >
                             </el-option>
                         </el-select>
                     </el-form-item>
-                    
+                    <el-row :gutter="10">
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="6">
+                            <el-form-item>
+                                <el-upload
+                                ref="upload_excel"
+                                class="upload-demo"
+                                action=""
+                                :on-change="handleChange"
+                                :on-remove="handleRemove"
+                                :on-exceed="handleExceed"
+                                :limit="limitUpload"
+                                accept="application/vnd.openxmlformats-    
+                                officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+                                :auto-upload="false">
+                                    <el-button  class="drop">Buscar Archivo</el-button>
+                                </el-upload>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :xs="25" :sm="6" :md="8" :lg="12" :xl="5">
+                            <el-form-item>
+                                <el-button type="success" class="drop" plain :disabled="submit_button"  @click="onSubmit('form')" >Guardar</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                 </el-form>
             </div>
         </div>
 
 
-        <el-upload
-        class="upload-demo"
-        action=""
-        :on-change="handleChange"
-        :on-remove="handleRemove"
-        :on-exceed="handleExceed"
-        :limit="limitUpload"
-        accept="application/vnd.openxmlformats-    
-        officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
-        :auto-upload="false">
-            <el-button  class="drop">Buscar Archivo</el-button>
-        </el-upload>
+        
 
         <el-main>
           <el-table :data="da">
@@ -85,24 +97,35 @@ export default {
     data() {
         return {
             tickets:[{name:"test"}],
+            fullscreenLoading: false,
             headers:[],
             limitUpload:1,
             fileTemp:null,
             file:null,
             da:[],
+            submit_button:true,
             dalen:0,
             form: {
-                unidad:''
+                unidad:'',
+                cuenta_nueva: '',
             },
             list_response: {
                 list_unidad: [],
-                list_cuenta: []
+                list_cuenta: [],
+                list_excel: [],
             },
             rules: {
                 unidad: [
                     {
                         required: true,
                         message: "Seleccione unidad",
+                        trigger: "blur"
+                    }
+                ],
+                cuenta_nueva: [
+                    {
+                        required: true,
+                        message: "Seleccione cuenta nueva",
                         trigger: "blur"
                     }
                 ],
@@ -124,7 +147,8 @@ export default {
                     cuentas: "cuentas",
                     respaldos: "respaldos",
                     secuenciasFac: "secuenciasFac",
-                    addActives: "active"
+                    addActives: "active",
+                    setExcel: "setDataExcel",
                     
                 },
         }
@@ -135,6 +159,45 @@ export default {
     },
     methods: {
         //Processing Method for Uploading Files  
+        onSubmit(form){
+            const h = this.$createElement;
+                this.$refs[form].validate(valid => {                    
+                        if (valid) {
+                            //loading
+                            const loading = this.$loading({
+                                lock: true,
+                                text: 'Guardando Datos',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0,0,0,0.7'
+                            })
+
+
+                            this.fullscreenLoading = true;
+                            axios.post(this.urlData.setExcel,{
+                                UE: this.form.unidad,
+                                CUENTA: this.form.cuenta_nueva,
+                                data_excel: this.list_response.list_excel
+                            }).then(response =>{
+                                const status = JSON.parse(response.status);
+                                if (status == "200") {
+                                    this.$message({
+                                        message: h("p", null, [
+                                            h("i", {style: "color: teal"}, "Cambio realizado con exito!")
+                                        ]),
+                                        type: "success"
+                                    });
+                                    this.form.unidad = "";
+                                    this.form.cuenta_nueva = "";
+                                    // this.fullscreenLoading = false;
+                                    this.$refs.upload_excel.clearFiles()
+                                    loading.close()
+                                    this.da = []
+                                    this.list_response.list_excel = []
+                                }
+                            })
+                        }
+                })
+        },
         getUnidad() {
             axios.get(this.urlData.unidades)
                 .then(response => {
@@ -227,16 +290,19 @@ export default {
                     outdata.map(v => {
                         let obj = {}
                         // obj.ue = v['UE']
-                        obj.cuenta = v['CUENTA']
+                        // obj.cuenta = v['CUENTA']
                         obj.fecha = v['FECHA']
                         obj.bien = v['BIEN']
                         obj.descripcion = v['DESCRIPCION']
                         obj.cantidad = v['CANTIDAD']
                         obj.costo = v['COSTO']
+                        obj.alza = v['COSTO']
                         arr.push(obj)
                     });
                     _this.da=arr;
                     _this.dalen=arr.length;
+                    _this.list_response.list_excel = arr;
+                    _this.submit_button = false;
                     return arr;
                 };
                 reader.readAsArrayBuffer(f);

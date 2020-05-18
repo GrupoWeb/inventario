@@ -45,6 +45,34 @@
                     </el-form-item>
                 </el-col>
             </el-row>          
+            <el-row :gutter="10" class="mt-2">
+                <el-col :xs="25" :sm="6" :md="8" :lg="20" :xl="12">
+                    <el-form-item prop="rol" > 
+                      <el-select v-model="form.rol" class="select_width" clearable filterable placeholder="Seleccionar el Rol">
+                            <el-option
+                                v-for="item in response_data.list_roles"
+                                :key="item.id"
+                                :label="item.description"
+                                :value="item.id"
+                                >
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+                <el-col :xs="25" :sm="6" :md="8" :lg="20" :xl="12"> 
+                    <el-form-item  prop="unidad">
+                          <el-select v-model="form.unidad" class="select_width" clearable filterable placeholder="Seleccionar Unidad Ejecutora">
+                            <el-option
+                                v-for="item in response_data.list_unit_data"
+                                :key="item.id_unidad"
+                                :label="item.unidad"
+                                :value="item.id_unidad"
+                                >
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>          
           <el-form-item>
             <el-button
               type="primary"
@@ -145,6 +173,8 @@ export default {
         url_data: {
             show_unit: 'getUser',
             set_unit: 'registerUser',
+            show_unit_data: 'unidades',
+            show_roles: 'getRoles',
         },
         validate_form: false,
         list_icon: {
@@ -155,7 +185,12 @@ export default {
             error: 'el-icon-error'
         },
         response_data: {
-            list_unit: []
+            list_unit: [],
+            list_unit_data: [],
+            list_roles: [],
+        },
+        roles: {
+          is_admin: 0
         },
         total: 0,
         currentPage: 1,
@@ -165,13 +200,29 @@ export default {
             nickname: "",
             password:"",
             email: "",
-            confirm: ""
+            confirm: "",
+            rol: "",
+            unidad: "",
         },
         formEdit: {
             name: ""
         },
         listProduct: [],
         rules: {
+            rol: [
+                {
+                    required: true,
+                    message: "Este campo no puede ser vacio",
+                    trigger: "blur"
+                }
+            ],
+            unidad: [
+                {
+                    required: true,
+                    message: "Este campo no puede ser vacio",
+                    trigger: "blur"
+                }
+            ],
             name: [
                 {
                     required: true,
@@ -230,10 +281,24 @@ export default {
   },
   mounted() {
     this.getAll();
+    this.getUniti();
+    this.getRoles();
     this.list_icon.iconos = this.list_icon.init;
 
   },
   methods: {
+      getRoles(){
+        axios.get(this.url_data.show_roles).then(response => {
+          this.response_data.list_roles = response.data;
+         
+        });
+      },
+      getUniti() {
+        axios.get(this.url_data.show_unit_data).then(response => {
+          this.response_data.list_unit_data = response.data;
+         
+        });
+      },
       load(){
           this.list_icon.iconos = this.list_icon.loader
       },
@@ -257,13 +322,17 @@ export default {
           this.$refs[form].validate(valid => {
             if (valid) {
               this.fullscreenLoading = true;
-              
+              if(this.form.rol == 1){
+                this.roles.is_admin = 1
+              }
               axios
                 .post(this.url_data.set_unit, {
                   name: this.form.name,
                   username: this.form.nickname,
                   email: this.form.email,
-                  password: this.form.password
+                  password: this.form.password,
+                  admin:this.roles.is_admin,
+                  id_unidad: this.form.unidad
                 })
                 .then(response => {
                     console.log(response.data)
@@ -281,6 +350,9 @@ export default {
                     this.form.email = "";
                     this.form.password = "";
                     this.form.confirm = "";
+                    this,form.rol = "";
+                    this.form.unidad = "";
+                    this.roles.is_admin = 0;
                     this.getAll();
                   }
                 });

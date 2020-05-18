@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 
 class ControllerInitial extends Controller
 {
+    public function __construct(){
+        ini_set('max_execution_time', 6500);
+    }
 
     public function addProductBienes($new_producto){
 
@@ -144,6 +147,79 @@ class ControllerInitial extends Controller
 
                 $activos_bien->codigo_sicoin = $value['BIEN'];
                 $activos_bien->cantidad = $value['CANTIDAD'];
+                $activos_bien->save();
+
+            }
+
+            DB::commit();
+            return response()->json(true,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(false,200);
+        }
+
+
+    }
+    public function setDataExcel(Request $request){ 
+
+        try {
+            DB::beginTransaction();
+            
+            
+            $data_account = $request->data_excel;
+            
+            foreach ($data_account as $key => $value) { 
+
+                
+                $secuencia = $this->sequences_data("activos");
+                $secuencia = json_decode(json_encode($secuencia));
+
+                $producto = $this->addProductBienes($value['descripcion']);
+                $producto = json_decode(json_encode($producto));
+
+
+                $activos_bien = new bienes_activos;
+
+                $activos_bien->id_activo = $secuencia->original->value;
+                $activos_bien->fecha_fiscal = 2020;
+                $activos_bien->id_entidad = 1;
+                $activos_bien->id_unidad = $request->UE;
+
+                $activos_bien->id_grupo = 3;
+                $activos_bien->id_categoria = 9;
+                $activos_bien->id_seccion = 24;
+                $activos_bien->id_tipo = 124;
+                $activos_bien->id_bien = 1;
+                $activos_bien->id_estado = 1;
+
+                $activos_bien->id_producto = $producto->original->id_producto;
+                
+                $activos_bien->comentario = "";
+                $activos_bien->modelo = "";
+                $activos_bien->serie = "";
+                $activos_bien->marca = "";
+
+                $activos_bien->fecha_ingreso = $value['fecha'];
+
+                $activos_bien->lugar_fisico = "";
+                $activos_bien->id_empleado = 1;
+
+                $activos_bien->id_dependencia = 1;
+                $activos_bien->id_cuenta = $request->CUENTA;
+                $activos_bien->id_documento_respaldo = 1;
+                $activos_bien->id_secuencia = 1;
+                $activos_bien->no_factura = "";
+
+                $activos_bien->valor_costo = $value['costo'];
+
+                $activos_bien->serie_factura = "A";
+                $activos_bien->nit_proveedor = "sin nit";
+                $activos_bien->alza = $value['alza'];
+
+                $activos_bien->baja = "0";
+
+                $activos_bien->codigo_sicoin = $value['bien'];
+                $activos_bien->cantidad = $value['cantidad'];
                 $activos_bien->save();
 
             }

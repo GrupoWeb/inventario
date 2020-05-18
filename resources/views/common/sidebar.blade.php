@@ -50,6 +50,10 @@
                         <i class="nav-icon fas fa-file-invoice"></i> Unidades</a>
                 </li>
                 <li class="nav-item ml-3">
+                    <a class="nav-link" href="./roles">
+                        <i class="nav-icon fas fa-file-invoice"></i> Roles</a>
+                </li>
+                <li class="nav-item ml-3">
                     <a class="nav-link" href="./showUsuarios">
                         <i class="nav-icon fas fa-ticket-alt"></i> Usuarios</a>
                 </li>                
