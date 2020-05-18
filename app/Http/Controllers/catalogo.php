@@ -19,6 +19,8 @@ use App\Model\dependencias;
 use App\Model\cuentas_activo;
 use App\Model\documentos_respaldo;
 use App\Model\secuencias_factura;
+use App\Model\roles_user;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 
@@ -58,6 +60,15 @@ class catalogo extends Controller
         return response()->json($date,200);
     }
 
+    public function getRoles(){
+        $rol = roles_user::all();
+        return response()->json($rol,200);
+    }
+
+    public function showroles(){
+        return view('admin.roles');
+    }
+
     public function sequences_data($tabla){
         
         // verificar si es tabla vacia
@@ -92,9 +103,131 @@ class catalogo extends Controller
         return response()->json($entidad,200);
     }
 
-    public function getUnidad(){
-        $entidad = unidaEjecutora::all();
+    public function getUser(){
+        $entidad = User::all();
         return response()->json($entidad,200);
+    }
+
+    public function visualizar(){
+        return view('admin.visualizar');
+    }
+
+    public function createUser(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $hashedPassIn = hash('sha256', $request->password, false);
+            $user = new User;
+            
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->password = $hashedPassIn;
+            $user->admin = $request->admin;
+            $user->id_unidad = $request->id_unidad;
+            $user->save();
+            
+            DB::commit();
+
+            return response()->json($user,200);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
+        
+    }
+
+    public function getUnidad(){
+        // $entidad = unidaEjecutora::all();
+        $entidad = unidaEjecutora::select('unida_ejecutoras.id_unidad','entidads.name as entidad','unida_ejecutoras.name as unidad')
+        ->join('entidads','entidads.id_entidad','=','unida_ejecutoras.id_entidad')->get();
+        return response()->json($entidad,200);
+    }
+
+    public function showUnidad(){
+        return view('admin.unidades_ejecutoras');
+    }
+
+    public function showEntidad(){
+        return view('admin.entidades');
+    }
+
+    public function showUsuarios(){
+        return view('admin.user');
+    }
+
+    public function setUnidad(Request $request){ 
+
+        try {
+
+            DB::beginTransaction();
+            
+            $secuencia = $this->sequences_data("unida_ejecutoras");
+            $secuencia = json_decode(json_encode($secuencia)) ;
+ 
+            $data = new unidaEjecutora;
+    
+            $data->id_unidad = $secuencia->original->value;
+            $data->id_entidad = 1;
+            $data->name = $request->name;
+            $data->save();
+
+            DB::commit();
+
+            return response()->json($data,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
+    }
+    public function setRoles(Request $request){ 
+
+        try {
+
+            DB::beginTransaction();
+            
+            $secuencia = $this->sequences_data("roles_users");
+            $secuencia = json_decode(json_encode($secuencia)) ;
+ 
+            $data = new roles_user;
+    
+            $data->id = $secuencia->original->value;
+            $data->description = $request->name;
+            $data->save();
+
+            DB::commit();
+
+            return response()->json($data,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
+    }
+
+    public function setEntidad(Request $request){ 
+
+        try {
+
+            DB::beginTransaction();
+            
+            $secuencia = $this->sequences_data("entidads");
+            $secuencia = json_decode(json_encode($secuencia)) ;
+ 
+            $data = new entidad;
+    
+            $data->id_entidad = $secuencia->original->value;;
+            $data->name = $request->name;
+            $data->save();
+
+            DB::commit();
+
+            return response()->json($data,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json($th,500);
+        }
     }
 
     public function getGrupo(){

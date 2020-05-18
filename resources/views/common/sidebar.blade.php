@@ -37,6 +37,36 @@
                 </li>                
             </ul>
         </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon fas fa-cogs"></i> Herramientas</a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./showEntidad">
+                        <i class="nav-icon fas fa-edit"></i> Entidades</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./showunidades">
+                        <i class="nav-icon fas fa-file-invoice"></i> Unidades</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./roles">
+                        <i class="nav-icon fas fa-file-invoice"></i> Roles</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./showUsuarios">
+                        <i class="nav-icon fas fa-ticket-alt"></i> Usuarios</a>
+                </li>                
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="./visualizar">
+                        <i class="nav-icon fas fa-dolly-flatbed"></i> Importar</a>
+                </li>                
+                <!-- <li class="nav-item ml-3">
+                    <a class="nav-link" href="./">
+                        <i class="nav-icon fas fa-file-invoice"></i> Dependencias</a>
+                </li>                 -->
+            </ul>
+        </li>
         <!-- <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-address-book"></i> Inventario</a>
