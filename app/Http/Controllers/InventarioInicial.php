@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\DB;
 
 class InventarioInicial extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function sequences_data($tabla){
         
         if($data = sequences::where('name','=',$tabla)->select('value')->count() === 0){

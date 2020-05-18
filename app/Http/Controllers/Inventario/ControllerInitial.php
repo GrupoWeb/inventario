@@ -13,6 +13,7 @@ class ControllerInitial extends Controller
 {
     public function __construct(){
         ini_set('max_execution_time', 6500);
+        $this->middleware('auth');
     }
 
     public function addProductBienes($new_producto){

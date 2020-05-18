@@ -13,6 +13,10 @@ use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 
 class BarCode extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function barTest(){
         
             $barcode = new BarcodeGenerator();

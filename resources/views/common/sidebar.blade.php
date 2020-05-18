@@ -11,9 +11,10 @@
                 </li>
             </ul>
         </li> -->
+        
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon fas fa-address-book"></i> Activos</a>
+                <i class="nav-icon fas fa-address-book"></i> Activos </a>
             <ul class="nav-dropdown-items">
                 <li class="nav-item ml-3">
                     <a class="nav-link" href="./active">
@@ -37,6 +38,8 @@
                 </li>                
             </ul>
         </li>
+        
+        @if (Auth()->user()->admin == 1)
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-cogs"></i> Herramientas</a>
@@ -67,6 +70,7 @@
                 </li>                 -->
             </ul>
         </li>
+        @endif
         <!-- <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
                 <i class="nav-icon fas fa-address-book"></i> Inventario</a>
