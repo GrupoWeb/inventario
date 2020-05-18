@@ -28,6 +28,10 @@ use Illuminate\Support\Facades\DB;
 
 class catalogo extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function addProduct(Request $request){
           $data = new product;
           $data->descripcion = $request->nameP;
