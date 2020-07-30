@@ -124,7 +124,7 @@
         import jsPDF from 'jspdf' 
         import html2canvas from "html2canvas"
         import domtoimage from "dom-to-image";
-        import 'jspdf-autotable'
+        import 'jspdf-autotable' 
 
 export default {
     data() {
