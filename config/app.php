@@ -178,6 +178,10 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        // Recaptcha
+
+        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+
 
     ],
 
@@ -234,6 +238,9 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
+        //Recaptcha
+
+        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
 
     ],
 

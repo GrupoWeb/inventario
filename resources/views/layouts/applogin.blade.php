@@ -19,6 +19,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+
+    <!-- {!! htmlScriptTagJsApi([
+            'action' => 'homepage'
+    ]) !!} -->
+
+    {!! htmlScriptTagJsApi() !!}
+    <!-- {!! ReCaptcha::htmlScriptTagJsApi() !!} -->
 </head>
 <body>
     <div id="app">
