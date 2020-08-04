@@ -171,17 +171,17 @@ class inventario extends Controller
             $inventory = new checkInventory;
 
             $inventory->id_inventory = $secuencia->original->value;
-            $inventory->id_activo = $request->id_activo;
+            $inventory->id_bien = $request->id_activo;
             $inventory->fisico = $request->fisico;
             $inventory->lugar = $request->lugar;
-            $inventory->empleado = $request->empleado;
+            $inventory->nit_empleado = $request->empleado;
             $inventory->save();
             
             DB::commit();
             return response()->json($inventory,200);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(false,500);
+            return response()->json($th,500);
         }
 
         

@@ -22,7 +22,7 @@
                                     <el-option
                                         v-for="item in unidades"
                                         :key="item.id_unidad"
-                                        :label="item.id_unidad + '-'+ item.name"
+                                        :label="item.id_unidad + '-'+ item.unidad"
                                         :value="item.id_unidad"
                                         >
                                     </el-option>
@@ -92,7 +92,7 @@
                     <el-row :gutter="10">
                         <el-col :span="12">
                             <el-form-item label="Bien:" prop="bien">
-                                <el-select v-model="form.bien" class="select_width" clearable filterable placeholder="Seleccionar">
+                                <el-select v-model="form.bien" class="select_width" clearable filterable placeholder="Seleccionar" no-data-text="No se selecciono un tipo">
                                     <el-option
                                         v-for="item in Bienes"
                                         :key="item.id_bien"
@@ -105,12 +105,13 @@
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label="Estado del Bien:" prop=estado>
-                                <el-select v-model="form.estado" class="select_width" clearable filterable placeholder="Seleccionar">
+                                <el-select v-model="form.estado" class="select_width" clearable filterable placeholder="Seleccionar" >
                                     <el-option
                                         v-for="item in EstadosProducto"
                                         :key="item.id_estadoP"
                                         :label="item.id_estadoP + '-'+ item.descripcion"
                                         :value="item.id_estadoP"
+                                        
                                         clearable>
                                     </el-option>
                                 </el-select>
@@ -262,7 +263,7 @@
 <!--                    datos del proveedor -->
                     <el-row :gutter="10" v-show="visible">
                         <el-col :span="24">
-                            <el-table :data="dataSatProvider" style="width: 100%">
+                            <el-table :data="dataSatProvider" style="width: 100%" empty-text="Error de Conexión de SAT">
                                 <el-table-column label="Nit" prop="nit"></el-table-column>
                                 <el-table-column label="Nombre" prop="name"></el-table-column>
                                 <el-table-column label="Dirección" prop="business_address"></el-table-column>
@@ -691,6 +692,7 @@
             getUnidad() {
                 axios.get(this.urlData.unidades)
                     .then(response => {
+                        console.log(response);
                         this.unidades = response.data;
                     })
             },
@@ -721,6 +723,7 @@
             getBienes() {
                 axios.post(this.urlData.Bienes,{bien: this.form.tipo})
                     .then(response => {
+                        console.log(response.data);
                         this.Bienes = response.data;
                     })
             },

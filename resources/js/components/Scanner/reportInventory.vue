@@ -119,7 +119,7 @@
             }
 </style>
 <script>
-        import FileSaver from 'file-saver'
+        // import FileSaver from 'file-saver'
         import XLSX from 'xlsx'
         import jsPDF from 'jspdf' 
         import html2canvas from "html2canvas"
