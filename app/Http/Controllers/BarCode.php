@@ -54,9 +54,9 @@ class BarCode extends Controller
        
         
         // $report = checkInventory::selectRaw('activos.id_activo as code','productos.descripcion as producto','activos.codigo_sicoin as sicoin','activos.fecha_ingreso as fecha','activos.cantidad as cantidad','check_inventories.fisico','(activos.cantidad - check_inventories.fisico) as diferencia','check_inventories.lugar','check_inventories.empleado')
-        $report = checkInventory::selectRaw('activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,check_inventories.fisico,check_inventories.lugar,check_inventories.empleado,
+        $report = checkInventory::selectRaw('activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,check_inventories.fisico,check_inventories.lugar,check_inventories.nit_empleado,
         (activos.cantidad - check_inventories.fisico) AS diferencia')
-                    ->join('activos','activos.id_activo','=','check_inventories.id_activo')
+                    ->join('activos','activos.id_activo','=','check_inventories.id_bien')
                     ->join('productos','productos.id_producto','=','activos.id_producto')
                     ->where('activos.id_cuenta','=',$request->account)->get();
     
