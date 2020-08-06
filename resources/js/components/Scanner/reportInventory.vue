@@ -136,7 +136,7 @@ export default {
             select_item:"",
             items_account:[],
             url:{
-                    getBienes: 'reportInventory/',
+                    getBienes: 'reportInventory',
                     getAccountInitial: 'getAccountInitial',
                 },    
             show_table: true,
@@ -179,6 +179,7 @@ export default {
             axios.post(this.url.getBienes,{
                 account: this.select_item
             }).then(response => {
+                consola.log(response.data);
                 this.bien = response.data;
                 this.total = response.data.length;
                 
