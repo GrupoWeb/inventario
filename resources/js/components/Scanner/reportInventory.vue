@@ -179,10 +179,12 @@ export default {
             axios.post(this.url.getBienes,{
                 account: this.select_item
             }).then(response => {
-                consola.log(response.data);
+               
                 this.bien = response.data;
                 this.total = response.data.length;
                 
+            }).catch(erro => {
+                //  consola.log(erro);
             })
         },
         current_change: function(currentPage) {
