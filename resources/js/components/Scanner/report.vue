@@ -129,7 +129,7 @@ export default {
             select_item:"",
             items_account:[],
             url:{
-                    getBienes: 'barCode/',
+                    getBienes: 'barCode/', 
                     getAccountInitial: 'getAccountInitial',
                 },    
             show_table: false,

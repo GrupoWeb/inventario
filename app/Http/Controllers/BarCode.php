@@ -8,6 +8,7 @@ use App\Model\bienes_activos;
 use App\Model\checkInventory;
 use Illuminate\Support\Facades\DB;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -40,9 +41,15 @@ class BarCode extends Controller
     public function BarCodeAll($account){
        
       
+
+        $id_unidad = Auth::user()->id_unidad;
+
+        // dd($id_unidad->id_unidad);
+
         $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
                     ->join('productos','productos.id_producto','=','activos.id_producto')
-                    ->where('id_cuenta','=',$account)->get();
+                    ->where('activos.id_cuenta','=',$account)
+                    ->where('activos.id_unidad','=',$id_unidad)->get();
 
         return $activos;
         
