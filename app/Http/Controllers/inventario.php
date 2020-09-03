@@ -165,20 +165,35 @@ class inventario extends Controller
         
         try {
             DB::beginTransaction();
-            $secuencia = $this->sequences_data("check_inventories");
-            $secuencia = json_decode(json_encode($secuencia)) ;
-            
-            $inventory = new checkInventory;
 
-            $inventory->id_inventory = $secuencia->original->value;
-            $inventory->id_bien = $request->id_activo;
-            $inventory->fisico = $request->fisico;
-            $inventory->lugar = $request->lugar;
-            $inventory->nit_empleado = $request->empleado;
-            $inventory->save();
+
+
+            if($existe = checkInventory::where('id_bien',$request->id_activo)->select('id_inventory')->count() === 0){
+                $vacio = true;
+            }else{
+                $vacio = false;
+            }
+
+
+            if($vacio === true){
+                $secuencia = $this->sequences_data("check_inventories");
+                $secuencia = json_decode(json_encode($secuencia)) ;
+                
+                $inventory = new checkInventory;
+    
+                $inventory->id_inventory = $secuencia->original->value;
+                $inventory->id_bien = $request->id_activo;
+                $inventory->fisico = $request->fisico;
+                $inventory->lugar = $request->lugar;
+                $inventory->nit_empleado = $request->empleado;
+                $inventory->save();
+                DB::commit();
+                return response()->json($inventory,200);
+            }else{
+                return response()->json(false,200);
+            }
+
             
-            DB::commit();
-            return response()->json($inventory,200);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json($th,500);

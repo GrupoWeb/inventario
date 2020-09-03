@@ -48,7 +48,9 @@ class LoginController extends Controller
 
     protected function login(Request $request){
 
+        
         $this->validateLogin($request);
+        // dd($this->validateLogin($request));
         // $user = User::where('email',$request->email)->first();
         $user = User::where('username',$request->email)->orWhere('email',$request->email)->first();
 //         dd($user);
