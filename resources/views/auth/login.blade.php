@@ -41,7 +41,7 @@
 
                         <div class="form-group rw mb-0">
                             <div class="col-md offset-md-4">
-                                {!! htmlFormSnippet() !!}
+                                <!-- {!! htmlFormSnippet() !!} -->
                                 @error('g-recaptcha-response')
                                     <span class="invalid-feedback" role="alert" style="display: block">
                                         <strong>{{ $message }}</strong>
