@@ -76,9 +76,13 @@ class LoginController extends Controller
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string',
-            recaptchaFieldName() => recaptchaRuleName()
+            'password' => 'required|string'
         ]);
+        // $request->validate([
+        //     $this->username() => 'required|string',
+        //     'password' => 'required|string',
+        //     recaptchaFieldName() => recaptchaRuleName()
+        // ]);
     }
 
     protected function sendFailedLoginResponse(Request $request)
