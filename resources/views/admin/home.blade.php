@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('contents')
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
@@ -28,7 +28,7 @@
              <param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                            
             </div> -->
         </div>
-        <script>
+        <!-- <script>
          var divElement = document.getElementById('viz1587676388403');                 
                 var vizElement = divElement.getElementsByTagName('object')[0];                 
                     if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';
@@ -45,7 +45,7 @@
                     scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';          
                     vizElement.parentNode.insertBefore(scriptElement, vizElement); 
         
-        </script>
+        </script> -->
     </div>
 @endsection
 @section('breadcrumb')

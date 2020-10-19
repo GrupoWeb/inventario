@@ -171,7 +171,7 @@ class ControllerInitial extends Controller
             
             foreach ($data_account as $key => $value) { 
 
-                
+               
                 $secuencia = $this->sequences_data("activos");
                 $secuencia = json_decode(json_encode($secuencia));
 

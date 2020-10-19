@@ -99,4 +99,7 @@ Route::get('getRoles','catalogo@getRoles');
 Route::get('roles','catalogo@showroles');
 Route::post('setRoles','catalogo@setRoles');
 
+Route::get('importar','catalogo@importar')->name('importar');
+Route::post('getBienes','catalogo@getBienes');
+
   /************** */
