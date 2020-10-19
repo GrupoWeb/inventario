@@ -50,6 +50,8 @@ Vue.component('usuario-component', require('./components/admin/usuarios.vue').de
 Vue.component('visualizar-component', require('./components/admin/visualizar.vue').default);
 Vue.component('roles-component', require('./components/admin/roles.vue').default);
 
+Vue.component('importar-excel', require('./components/admin/importar.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

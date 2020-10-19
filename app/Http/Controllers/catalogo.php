@@ -20,6 +20,7 @@ use App\Model\cuentas_activo;
 use App\Model\documentos_respaldo;
 use App\Model\secuencias_factura;
 use App\Model\roles_user;
+use App\Model\bienes_activos;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -313,5 +314,36 @@ class catalogo extends Controller
     }
 
 
+    public function importar(){
+        return view('admin.importar');
+    }
+
+    public function getBienes(Request $request){
+        try {
+            DB::beginTransaction();
+
+            
+            $bien = bienes_activos::select('codigo_sicoin')->where(['id_cuenta' => $request->cuenta, 'id_unidad' => $request->unidad,'codigo_sicoin' => $request->codigo])->get();
+            DB::commit();
+
+            return response()->json($bien,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+    }
+
+    // public function getBienes(Request $request){
+    //     try {
+    //         DB::beginTransaction();
+
+            
+    //         $bien = bienes_activos::select('codigo_sicoin')->where(['id_cuenta' => $request->cuenta, 'id_unidad' => $request->unidad])->get();
+    //         DB::commit();
+
+    //         return response()->json($bien,200);
+    //     } catch (\Throwable $th) {
+    //         DB::rollBack();
+    //     }
+    // }
     
 }

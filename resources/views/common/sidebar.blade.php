@@ -64,10 +64,10 @@
                     <a class="nav-link" href="./visualizar">
                         <i class="nav-icon fas fa-dolly-flatbed"></i> Importar</a>
                 </li>                
-                <!-- <li class="nav-item ml-3">
-                    <a class="nav-link" href="./">
-                        <i class="nav-icon fas fa-file-invoice"></i> Dependencias</a>
-                </li>                 -->
+                <li class="nav-item ml-3">
+                    <a class="nav-link" href="{{ route('importar') }}">
+                        <i class="nav-icon fas fa-file-invoice"></i> Continuidad</a>
+                </li>                
             </ul>
         </li>
         @endif
