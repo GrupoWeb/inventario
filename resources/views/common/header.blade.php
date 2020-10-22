@@ -21,7 +21,7 @@
                     <strong>Herramientas</strong>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/changePasswordUser">
                     <i class="fa fa-shield"></i> Cambiar Clave</a>
                 <a class="dropdown-item" href="/logout">
                     <i class="fa fa-lock"></i> Salir</a>

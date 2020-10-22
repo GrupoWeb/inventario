@@ -103,3 +103,7 @@ Route::get('importar','catalogo@importar')->name('importar');
 Route::post('getBienes','catalogo@getBienes');
 
   /************** */
+
+  // Reset Pasword User
+  Route::get('changePasswordUser','PasswordResetController@reset');
+  Route::post('changePassword','PasswordResetController@changePassword')->name('changePassword');
