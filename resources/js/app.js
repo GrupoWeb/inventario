@@ -51,6 +51,8 @@ Vue.component('visualizar-component', require('./components/admin/visualizar.vue
 Vue.component('roles-component', require('./components/admin/roles.vue').default);
 
 Vue.component('importar-excel', require('./components/admin/importar.vue').default);
+Vue.component('search-bien', require('./components/Scanner/search.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

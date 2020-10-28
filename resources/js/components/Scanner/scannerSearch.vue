@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-header text-white bg-primary">Sistema de SICOIN</div>
+      <div class="card-header text-white bg-primary">Sistema de SICOIN </div>
       <div class="card-body">
         <el-form
           ref="form"
