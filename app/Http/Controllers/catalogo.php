@@ -332,6 +332,10 @@ class catalogo extends Controller
         }
     }
 
+    public function searchBien(){
+        return view('Scanner.search');
+    }
+
     // public function getBienes(Request $request){
     //     try {
     //         DB::beginTransaction();

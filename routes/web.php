@@ -61,6 +61,7 @@ Route::post('reportInventory','BarCode@BarCodeAllReport');
   Route::get('search','inventario@showSearch'); 
   Route::get('printCode/{code}','BarCode@GetBarCodeById');
   Route::get('searchCode/{code}','BarCode@GetSearchCodeById');
+  Route::get('Consulta/{code}','BarCode@SearchCodeById');
   Route::get('List','inventario@showList');
   /******************** */
 
@@ -107,3 +108,4 @@ Route::post('getBienes','catalogo@getBienes');
   // Reset Pasword User
   Route::get('changePasswordUser','PasswordResetController@reset');
   Route::post('changePassword','PasswordResetController@changePassword')->name('changePassword');
+  route::get('buscar','catalogo@searchBien')->name('search');

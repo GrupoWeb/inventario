@@ -99,6 +99,8 @@ class BarCode extends Controller
         $code_data = bienes_activos::select('codigo_sicoin')->where('codigo_sicoin','=',$code)->count();
         
         if($code_data == 0){
+            return response()->json(false,200);
+            
             $html = '<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -164,11 +166,12 @@ class BarCode extends Controller
                     
                     
                     <style>
-                        @page { size:2in 0.9in; margin: 0cm}
+                        @page { size:2in 0.9in; margin: 0cm;}
                         * {
                             padding:0 auto;
-                            font-size: 12px;
+                            font-size: 50px;
                             font-family: "Times New Roman";
+                            
                         }
                         
                         .centrado {
@@ -182,12 +185,24 @@ class BarCode extends Controller
                             width: 170px;
                             max-width: 170px;
                             padding-left: -85px;
-                            padding-top:30px;
+                            // padding-top:30px;
+                            padding-top:13px;
+                            font-size:45px;
+                            
                         }
                         
                         img {
                             max-width: inherit;
                             width: inherit;
+                        }
+
+                        .spanText{
+                            font-size: 15px;
+                            margin-left: 30%;
+                            font-family: sans-serif;
+                            text-anchor: middle;
+                            padding-top: 600px;
+
                         }
                         </style>
                     
@@ -195,24 +210,41 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                            <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,50,array(0,0,0),true) . '" alt="barcode"   />
+                        <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"/>
                     </div>
                     <script>
                         
                     </script>
                 </body>
                 </html>';
-        }
-        $code = '<div class="BarCode">'. DNS1D::getBarcodeHTML($code_data[0]['codigo_sicoin'],"C128",3,110,'black',true).'</div>';
-        $code2 = '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',3,110,array(0,0,0),true) . '" alt="barcode"  />';
-        // <img src="data:image/png;base64,' . DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
 
-        $pdf = \PDF::loadHtml($html);
-        $html2 = 'test';
-        $paper_size = array(0,0,144,308);
-        $pdf->setPaper($paper_size, 'landscape');
-        // $pdf->setOptions(['dpi' => 120, 'defaultFont' => 'sans-serif']);
-        return $pdf->stream("Códigos de Barra".'.pdf'); 
+                $code = '<div class="BarCode">'. DNS1D::getBarcodeHTML($code_data[0]['codigo_sicoin'],"C128",3,110,'black',true).'</div>';
+                $code2 = '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',3,110,array(0,0,0),true) . '" alt="barcode"  />';
+                // <img src="data:image/png;base64,' . DNS1D::getBarcodePNGPath($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"   />
+                // <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,50,array(0,0,0),true) . '" alt="barcode"/>
+        
+                // return $html;
+                $pdf = \PDF::loadHtml($html);
+                $html2 = 'test';
+                $paper_size = array(0,0,144,308);
+                $pdf->setPaper($paper_size, 'landscape');
+                // $pdf->setOptions(['dpi' => 120, 'defaultFont' => 'sans-serif']);
+
+                $path = public_path('codigo_barra/');
+                $fileName = $code_data[0]['codigo_sicoin'] . '.pdf';
+                $pdf->save($path . '/' . $fileName);
+                $pdf->download($fileName);
+                return response()->json(true,200);
+
+
+
+
+
+
+                // return $pdf->stream("Códigos de Barra".'.pdf'); 
+
+        }
+
         // return $code2;
         
     }
@@ -222,6 +254,18 @@ class BarCode extends Controller
         
         $code_data = bienes_activos::select('activos.id_activo','productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')
                         ->join('productos','productos.id_producto','=','activos.id_producto')
+                        ->where('codigo_sicoin','=',$code)->get();
+
+        return response()->json($code_data,200);
+        
+    }
+
+    public function SearchCodeById($code){
+
+        
+        $code_data = bienes_activos::select('activos.id_activo','productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad','check_inventories.fisico')
+                        ->join('productos','productos.id_producto','=','activos.id_producto')
+                        ->join('check_inventories','check_inventories.id_bien','=','activos.id_activo')
                         ->where('codigo_sicoin','=',$code)->get();
 
         return response()->json($code_data,200);
