@@ -210,7 +210,7 @@ class BarCode extends Controller
                 </head>
                 <body>
                     <div class="ticket">
-                        <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,80,array(0,0,0),true) . '" alt="barcode"/>
+                        <img src="data:image/png;base64,' . DNS1D::getBarcodePNG($code_data[0]['codigo_sicoin'], 'C128',2,75,array(0,0,0),true) . '" alt="barcode"/>
                     </div>
                     <script>
                         
