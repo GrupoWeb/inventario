@@ -8,6 +8,7 @@ use App\Model\bienes_activos;
 use App\Model\product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Model\auditado;
 
 class ControllerInitial extends Controller
 {
@@ -233,6 +234,24 @@ class ControllerInitial extends Controller
         }
 
 
+    }
+
+    public function addAuditado(Request $request){
+        try {
+            DB::beginTransaction();
+
+            $auditado = new auditado;
+
+            $auditado->sicoin = $request->sicoin;
+            $auditado->save();
+            DB::commit();
+
+            return response()->json($auditado,200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json(false,200);
+        }
     }
 
 }

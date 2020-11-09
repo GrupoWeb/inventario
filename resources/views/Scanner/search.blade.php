@@ -9,5 +9,5 @@
     </div>
 @endsection
 @section('breadcrumb')
-    Consulta de Bienes
+    Auditoría
 @endsection
