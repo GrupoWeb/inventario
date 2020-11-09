@@ -109,3 +109,6 @@ Route::post('getBienes','catalogo@getBienes');
   Route::get('changePasswordUser','PasswordResetController@reset');
   Route::post('changePassword','PasswordResetController@changePassword')->name('changePassword');
   route::get('buscar','catalogo@searchBien')->name('search');
+
+
+  Route::post('addAuditado','Inventario\ControllerInitial@addAuditado');

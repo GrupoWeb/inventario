@@ -23,43 +23,6 @@
       </el-col>
     </el-row>
     <div>
-      <!-- <el-link :underline="false" v-bind:href="'/printer/'+select_item" 
-                class=" mt-3 mb-3" target="_blank"
-                >
-                    <el-button type="success" icon="el-icon-printer"></el-button>
-            </el-link>
-            
-            <el-button  class="my-5" type="success"  @click="exportExcel" >Exportar</el-button> -->
-
-      <!-- <a href="./printer/" class="btn btn-primary  mt-3 mb-3" target="_blank">
-                                <i class="fas fa-print"></i> 
-                            </a> -->
-      <!-- <el-table
-                :data="bien.slice(
-                                (currentPage - 1) * pagesize,
-                                currentPage * pagesize
-                            )"
-                style="width:100%"
-                
-                >
-                <el-table-column label="No." type="index"></el-table-column>
-                <el-table-column label="Fecha" prop="fecha" width="100"></el-table-column>
-                <el-table-column label="No. Bien" prop="sicoin" width="100"></el-table-column>
-                <el-table-column label="Producto" prop="producto" ></el-table-column>
-                <el-table-column label="Sistema" prop="cantidad" width="80"></el-table-column>
-                <el-table-column label="Fisico"  prop="fisico" width="80"></el-table-column>
-                <el-table-column label="Diferencia" prop="diferencia" width="90"></el-table-column>
-                <el-table-column label="Lugar" prop="lugar" width="150"></el-table-column>
-                <el-table-column label="Empleado" prop="empleado" width="150"></el-table-column>
-            </el-table> -->
-      <!-- <div style="text-align: left;margin-top: 30px;">
-                <el-pagination
-                    background
-                    layout="total,prev, pager, next"
-                    :total="total"
-                    @current-change="current_change"
-                ></el-pagination>
-            </div> -->
       <div v-if="show_error" class="mt-5">
         <el-alert title="Sin registros" type="error" effect="dark"> </el-alert>
       </div>
@@ -82,6 +45,7 @@
               <th class="handler_producto">Diferencia</th>
               <th class="handler_producto">Lugar</th>
               <th class="handler_producto">Empleado</th>
+              <th class="handler_producto">Auditor</th>
             </tr>
           </thead>
           <tbody>
@@ -95,6 +59,7 @@
               <td class="handler_for_product">{{ item.diferencia }}</td>
               <td class="handler_for_product">{{ item.lugar }}</td>
               <td class="handler_for_product">{{ item.nit_empleado }}</td>
+              <td class="handler_for_product">{{ item.auditado }}</td>
             </tr>
           </tbody>
         </table>
@@ -186,6 +151,7 @@ export default {
           account: this.select_item,
         })
         .then((response) => {
+          console.log("data",response.data)
           this.bien = response.data;
           this.total = response.data.length;
 

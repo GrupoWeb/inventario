@@ -63,11 +63,12 @@ class BarCode extends Controller
         $id_unidad = Auth::user()->id_unidad;
         
         // $report = checkInventory::selectRaw('activos.id_activo as code','productos.descripcion as producto','activos.codigo_sicoin as sicoin','activos.fecha_ingreso as fecha','activos.cantidad as cantidad','check_inventories.fisico','(activos.cantidad - check_inventories.fisico) as diferencia','check_inventories.lugar','check_inventories.empleado')
-        $report = checkInventory::selectRaw('activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,
+        $report = checkInventory::selectRaw('distinct activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,
         check_inventories.fisico,check_inventories.lugar,check_inventories.nit_empleado,
-        (activos.cantidad - check_inventories.fisico) AS diferencia')
+        (activos.cantidad - check_inventories.fisico) AS diferencia, (CASE WHEN auditados.sicoin IS NULL THEN "" ELSE "AUDITADO" END) as auditado')
                     ->join('activos','activos.id_activo','=','check_inventories.id_bien')
                     ->join('productos','productos.id_producto','=','activos.id_producto')
+                    ->leftJoin('auditados','auditados.sicoin','=','activos.codigo_sicoin')
                     ->where('activos.id_cuenta','=',$request->account)
                     ->where('activos.id_unidad','=', $id_unidad)->get(); 
     

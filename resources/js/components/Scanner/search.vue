@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-header text-white bg-primary">Consulta </div>
+      <div class="card-header text-white bg-primary">Consulta Auditoría</div>
       <div class="card-body">
         <el-form
           ref="form"
@@ -181,6 +181,7 @@ export default {
       fullscreenLoading: false,
       dataSatProvider: [],
       urlData: {
+        addAuditado: "addAuditado",
         searchCode: "Consulta/",
         setCountInventory: "setCountInventory",
         urlSat:
@@ -297,7 +298,8 @@ export default {
           axios
             .get(this.urlData.searchCode + this.form.name)
             .then((response) => {
-              console.log(response.data)
+              // console.log(response.data)
+              // console.log("data",response)
               if (response.data.length == 0) {
                 this.loading = false;
                 this.showCard = false;
@@ -312,6 +314,13 @@ export default {
                 if (status == "200") {
                   this.id_activo_data = response.data[0].id_activo;
                   this.loading = false;
+
+                  axios.post(this.urlData.addAuditado,{
+                  sicoin: response.data[0].codigo_sicoin
+                  })
+                  .then(respuesta => {
+                    console.log(respuesta)
+                  })
                 }
               }
             });
