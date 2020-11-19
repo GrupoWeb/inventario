@@ -79,6 +79,26 @@ class BarCode extends Controller
         // ]);
     }
 
+    public function BarCodeAllReportAuditoria(Request $request){
+       
+
+        
+        $report = checkInventory::selectRaw('distinct activos.id_activo,productos.descripcion as producto,activos.codigo_sicoin as sicoin, activos.fecha_ingreso as fecha, activos.cantidad as cantidad,
+        check_inventories.fisico,check_inventories.lugar,check_inventories.nit_empleado,
+        (activos.cantidad - check_inventories.fisico) AS diferencia, (CASE WHEN auditados.sicoin IS NULL THEN "" ELSE "AUDITADO" END) as auditado')
+                    ->join('activos','activos.id_activo','=','check_inventories.id_bien')
+                    ->join('productos','productos.id_producto','=','activos.id_producto')
+                    ->leftJoin('auditados','auditados.sicoin','=','activos.codigo_sicoin')
+                    ->where('activos.id_cuenta','=',$request->account)
+                    ->where('activos.id_unidad','=',$request->unidad)->get(); 
+    
+        return $report; 
+        
+        // return view('active.Barcode',[
+        //     "activos" => $activos
+        // ]);
+    }
+
     public function BarCodePrinter($data_account){
       
         $activos = bienes_activos::select('productos.descripcion','activos.codigo_sicoin','activos.fecha_ingreso', 'activos.cantidad')

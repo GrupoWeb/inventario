@@ -112,3 +112,5 @@ Route::post('getBienes','catalogo@getBienes');
 
 
   Route::post('addAuditado','Inventario\ControllerInitial@addAuditado');
+  Route::get('ReporteAuditoria','Inventario\ControllerInitial@showReporte')->name('reporteAuditoria');
+  Route::post('BarCodeAllReportAuditoria','BarCode@BarCodeAllReportAuditoria');
