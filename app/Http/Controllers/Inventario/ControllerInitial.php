@@ -254,4 +254,10 @@ class ControllerInitial extends Controller
         }
     }
 
+    public function showReporte(){
+        return view('auditoria.reporte');
+    }
+
+    
+
 }

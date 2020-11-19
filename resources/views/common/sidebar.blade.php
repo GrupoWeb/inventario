@@ -45,6 +45,12 @@
                             <i class="nav-icon fas fa-search"></i> Auditoria</a>
                     </li>                               
                 </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item ml-3">
+                        <a class="nav-link" href="{{ route('reporteAuditoria') }}">
+                            <i class="nav-icon fas fa-search"></i> Reporte</a>
+                    </li>                               
+                </ul>
             </li>
 
             <li class="nav-item nav-dropdown">
@@ -118,6 +124,12 @@
                         <li class="nav-item ml-3">
                             <a class="nav-link" href="{{ route('search') }}">
                                 <i class="nav-icon fas fa-search"></i> Auditoria</a>
+                        </li>                               
+                    </ul>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item ml-3">
+                            <a class="nav-link" href="{{ route('reporteAuditoria') }}">
+                                <i class="nav-icon fas fa-search"></i> Reporte</a>
                         </li>                               
                     </ul>
                 </li>

@@ -52,6 +52,7 @@ Vue.component('roles-component', require('./components/admin/roles.vue').default
 
 Vue.component('importar-excel', require('./components/admin/importar.vue').default);
 Vue.component('search-bien', require('./components/Scanner/search.vue').default);
+Vue.component('auditoria-reporte',require('./components/auditoria/reporte.vue').default);
 
 
 /**
